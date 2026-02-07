@@ -2,6 +2,7 @@ import { getPlant } from "../lib/api.js";
 import type { PlantDetail } from "../lib/types.js";
 import { createPlantCard } from "../components/plant-card.js";
 import { createTagList } from "../components/tag-list.js";
+import { PLANT_ILLUSTRATIONS } from "../lib/illustrations.js";
 
 export function renderPlantDetailPage(slug: string): () => void {
   const app = document.getElementById("app")!;
@@ -18,10 +19,11 @@ export function renderPlantDetailPage(slug: string): () => void {
     const hero = document.createElement("div");
     hero.className = "plant-hero";
 
-    if (plant.image_url) {
+    const imageUrl = plant.image_url || PLANT_ILLUSTRATIONS[slug];
+    if (imageUrl) {
       const img = document.createElement("img");
-      img.src = plant.image_url;
-      img.alt = plant.name;
+      img.src = imageUrl;
+      img.alt = `${plant.name} — Köhler's Medizinal-Pflanzen`;
       img.className = "plant-hero__image";
       hero.appendChild(img);
     }

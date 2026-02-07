@@ -20,6 +20,8 @@ export interface GraphOptions {
 
 export interface GraphInstance {
   destroy: () => void;
+  /** Dim nodes not in the set. Pass null to reset. */
+  filterNodes: (visibleIds: Set<string> | null) => void;
 }
 
 const NODE_COLORS: Record<string, string> = {
@@ -191,12 +193,30 @@ export function createGraph(
     label.attr("x", (d) => d.x!).attr("y", (d) => d.y!);
   });
 
+  function filterNodes(visibleIds: Set<string> | null) {
+    if (!visibleIds) {
+      // Reset: show all
+      node.attr("opacity", 1);
+      link.attr("opacity", 0.6);
+      label.attr("opacity", 1);
+      return;
+    }
+    node.attr("opacity", (n) => (visibleIds.has(n.id) ? 1 : 0.08));
+    label.attr("opacity", (n) => (visibleIds.has(n.id) ? 1 : 0.08));
+    link.attr("opacity", (e) => {
+      const src = typeof e.source === "object" ? e.source.id : e.source;
+      const tgt = typeof e.target === "object" ? e.target.id : e.target;
+      return visibleIds.has(src as string) && visibleIds.has(tgt as string) ? 0.6 : 0.03;
+    });
+  }
+
   return {
     destroy: () => {
       simulation.stop();
       tooltip.remove();
       svg.remove();
     },
+    filterNodes,
   };
 }
 

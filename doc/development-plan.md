@@ -92,7 +92,7 @@ Static SPA deployed to Cloudflare Pages. Vite + vanilla TypeScript.
 | 5.6 | Build plant detail page (conditions, preparations, synergies, cautions) | ✅ Done |
 | 5.7 | Build condition page (plants that treat it, grouped by tradition) | ✅ Done |
 | 5.8 | Build tradition overview page | ✅ Done |
-| 5.9 | Add plant illustrations (Köhler's Medizinal-Pflanzen from Wikimedia Commons / public domain) to plant detail view | ⬚ Pending |
+| 5.9 | Add plant illustrations (Köhler's Medizinal-Pflanzen, public domain) to plant detail + card views | ✅ Done |
 
 ---
 
@@ -106,7 +106,7 @@ The signature feature: an interactive D3.js force-directed graph.
 | 6.2 | Build D3 force-directed graph component (`web/src/components/graph.ts`) | ✅ Done |
 | 6.3 | Build explorer page with graph + search/filter sidebar | ✅ Done |
 | 6.4 | Implement interactions: click node (expand/detail), hover (highlight neighbors), click edge (synergy info) | ✅ Done |
-| 6.5 | Implement tradition and body system filters on graph view | ⬚ Pending |
+| 6.5 | Implement tradition and body system filters on graph view | ✅ Done |
 
 ### Interaction Model
 

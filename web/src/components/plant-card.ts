@@ -1,3 +1,5 @@
+import { PLANT_ILLUSTRATIONS } from "../lib/illustrations.js";
+
 interface PlantCardData {
   slug: string;
   name: string;
@@ -11,6 +13,16 @@ export function createPlantCard(plant: PlantCardData): HTMLElement {
   card.className = "plant-card";
   card.href = `/plant/${plant.slug}`;
   card.setAttribute("data-route", "");
+
+  const illustration = PLANT_ILLUSTRATIONS[plant.slug];
+  if (illustration) {
+    const thumb = document.createElement("img");
+    thumb.src = illustration;
+    thumb.alt = "";
+    thumb.className = "plant-card__thumb";
+    thumb.loading = "lazy";
+    card.appendChild(thumb);
+  }
 
   const name = document.createElement("div");
   name.className = "plant-card__name";
