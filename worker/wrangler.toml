@@ -5,4 +5,4 @@ compatibility_date = "2025-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "plantme-db"
-database_id = "local"
+database_id = "f7b4e815-e542-4043-80c8-ba96c1b4f74d"
