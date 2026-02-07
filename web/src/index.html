@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlantMe — Nature's Pharmacy Explorer</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <nav id="main-nav">
+    <a href="/" class="nav-brand">
+      <span class="nav-icon">🌿</span>
+      <span class="nav-title">PlantMe</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" data-route="/">Search</a>
+      <a href="/explorer" data-route="/explorer">Explorer</a>
+      <a href="/traditions" data-route="/traditions">Traditions</a>
+    </div>
+  </nav>
+
+  <main id="app">
+    <div class="loading">Loading...</div>
+  </main>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "plantme",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Searchable knowledge base and interactive explorer for traditional plant-based medicine",
+  "workspaces": [
+    "pipeline",
+    "worker",
+    "web"
+  ],
+  "scripts": {
+    "parse": "npm run parse -w pipeline",
+    "validate": "npm run validate -w pipeline",
+    "seed": "npm run seed -w pipeline",
+    "dev:worker": "npm run dev -w worker",
+    "dev:web": "npm run dev -w web",
+    "build:web": "npm run build -w web",
+    "deploy:worker": "npm run deploy -w worker"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:EsteSystems/plantme.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlantMe Seed Data",
+  "description": "Structured data extracted from the Nature's Pharmacy compendium",
+  "type": "object",
+  "required": ["plants", "conditions", "body_systems", "traditions", "preparations", "substances", "cautions", "plant_conditions", "plant_traditions", "plant_preparations", "plant_substances", "plant_cautions", "synergies"],
+  "properties": {
+    "plants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name"],
+        "properties": {
+          "id": { "type": "integer" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "scientific": { "type": ["string", "null"] },
+          "alt_names": { "type": "array", "items": { "type": "string" } },
+          "description": { "type": ["string", "null"] },
+          "historical": { "type": ["string", "null"] },
+          "part_used": { "type": ["string", "null"] },
+          "image_url": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name", "system_id"],
+        "properties": {
+          "id": { "type": "integer" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "description": { "type": ["string", "null"] },
+          "system_id": { "type": "integer" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "body_systems": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name", "section_num"],
+        "properties": {
+          "id": { "type": "integer" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "section_num": { "type": "integer" },
+          "description": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "traditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name"],
+        "properties": {
+          "id": { "type": "integer" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "description": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "preparations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name"],
+        "properties": {
+          "id": { "type": "integer" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "instructions": { "type": ["string", "null"] },
+          "equipment": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "substances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name"],
+        "properties": {
+          "id": { "type": "integer" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "description": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "cautions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name"],
+        "properties": {
+          "id": { "type": "integer" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string" },
+          "severity": { "type": "string", "enum": ["info", "warning", "danger"] },
+          "detail": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "plant_conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant_id", "condition_id"],
+        "properties": {
+          "plant_id": { "type": "integer" },
+          "condition_id": { "type": "integer" },
+          "dosage": { "type": ["string", "null"] },
+          "notes": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "plant_traditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant_id", "tradition_id"],
+        "properties": {
+          "plant_id": { "type": "integer" },
+          "tradition_id": { "type": "integer" },
+          "historical_note": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "plant_preparations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant_id", "preparation_id"],
+        "properties": {
+          "plant_id": { "type": "integer" },
+          "preparation_id": { "type": "integer" },
+          "instructions": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "plant_substances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant_id", "substance_id"],
+        "properties": {
+          "plant_id": { "type": "integer" },
+          "substance_id": { "type": "integer" },
+          "part_used": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "plant_cautions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant_id", "caution_id"],
+        "properties": {
+          "plant_id": { "type": "integer" },
+          "caution_id": { "type": "integer" },
+          "detail": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "synergies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant_a_id", "plant_b_id"],
+        "properties": {
+          "plant_a_id": { "type": "integer" },
+          "plant_b_id": { "type": "integer" },
+          "mechanism": { "type": ["string", "null"] },
+          "effect": { "type": ["string", "null"] },
+          "tradition": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
