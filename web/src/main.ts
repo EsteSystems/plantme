@@ -4,6 +4,7 @@ import { renderPlantDetailPage } from "./pages/plant-detail.js";
 import { renderConditionPage } from "./pages/condition.js";
 import { renderTraditionsPage, renderTraditionDetailPage } from "./pages/traditions.js";
 import { renderExplorerPage } from "./pages/explorer.js";
+import { renderSubstancePage } from "./pages/substance.js";
 
 const router = new Router([
   { pattern: "/", handler: () => renderSearchPage() },
@@ -12,6 +13,7 @@ const router = new Router([
   { pattern: "/tradition/:slug", handler: (p) => renderTraditionDetailPage(p.slug) },
   { pattern: "/plant/:slug", handler: (p) => renderPlantDetailPage(p.slug) },
   { pattern: "/condition/:slug", handler: (p) => renderConditionPage(p.slug) },
+  { pattern: "/substance/:slug", handler: (p) => renderSubstancePage(p.slug) },
 ]);
 
 // Update active nav link on navigation
