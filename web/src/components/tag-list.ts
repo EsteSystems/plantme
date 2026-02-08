@@ -8,12 +8,19 @@ export function createTagList(items: TagItem[]): HTMLElement {
   container.className = "tag-list";
 
   for (const item of items) {
-    const tag = document.createElement("a");
-    tag.className = "tag";
-    tag.href = item.href;
-    tag.setAttribute("data-route", "");
-    tag.textContent = item.label;
-    container.appendChild(tag);
+    if (item.href && item.href !== "#") {
+      const tag = document.createElement("a");
+      tag.className = "tag";
+      tag.href = item.href;
+      tag.setAttribute("data-route", "");
+      tag.textContent = item.label;
+      container.appendChild(tag);
+    } else {
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = item.label;
+      container.appendChild(tag);
+    }
   }
 
   return container;
