@@ -373,6 +373,13 @@ const SUBSTANCE_PATTERNS: { name: string; patterns: RegExp[] }[] = [
   { name: "Cineole", patterns: [/cineole/i, /eucalyptol/i] },
   { name: "Linalool", patterns: [/linalool/i] },
   { name: "Baicalin", patterns: [/baicalin/i, /baicalein/i] },
+  { name: "Thymoquinone", patterns: [/thymoquinone/i] },
+  { name: "Anthraquinones", patterns: [/anthraquinone/i, /\bemodin\b/i] },
+  { name: "Tartaric acid", patterns: [/tartaric/i] },
+  { name: "Diosgenin", patterns: [/diosgenin/i] },
+  { name: "Isothiocyanates", patterns: [/isothiocyanate/i, /sulforaphane/i] },
+  { name: "Protodioscin", patterns: [/protodioscin/i] },
+  { name: "Arjunolic acid", patterns: [/arjunolic/i, /arjunin/i] },
 ];
 
 // Substance descriptions: chemistry, effects, and preparation transformations
@@ -524,6 +531,9 @@ const SUBSTANCE_DESCRIPTIONS: Record<string, string> = {
   "Baicalin":
     "Flavone glycoside found in skullcap (Scutellaria baicalensis and S. lateriflora). Anti-inflammatory: inhibits 12/15-lipoxygenase and COX-2. Also antiviral (inhibits viral replication), neuroprotective (reduces excitotoxicity), and anxiolytic (binds benzodiazepine site on GABA-A receptors). Hydrolyzed by gut bacteria to baicalein (aglycone), which crosses the blood-brain barrier more readily. Water-soluble: extracts well in decoction (traditional Chinese method). Alcohol tincture also effective. Drying preserves baicalin. Heat-stable. Chinese skullcap root contains much higher baicalin levels than American skullcap (which acts more via flavonoids and diterpenes).",
 
+  "Kaempferol":
+    "Flavonol found in moringa, witch hazel, ginkgo, tea, and many fruits and vegetables. Structurally similar to quercetin with one fewer hydroxyl group. Anti-inflammatory: inhibits COX-2, iNOS, and NF-κB. Antioxidant: scavenges superoxide and peroxynitrite. Also neuroprotective and cardioprotective in preclinical studies. Moderate oral bioavailability — glycoside forms (from food) are better absorbed than free kaempferol. Water-soluble glycosides extract in tea; aglycone extracts better in alcohol. Heat-stable: survives boiling and cooking. Drying preserves kaempferol. Gut bacteria cleave glycoside bonds, releasing free kaempferol for absorption in the colon. Synergistic with quercetin for anti-inflammatory effects.",
+
   "Quercetin":
     "Flavonol found widely in onions, elderflower, stinging nettle, hawthorn, and many fruits and vegetables. Potent antioxidant and anti-inflammatory: inhibits COX-2, LOX, and NF-κB. Mast cell stabilizer — inhibits histamine release (anti-allergic). Also inhibits xanthine oxidase (anti-gout mechanism). Poorly bioavailable in aglycone form; glycoside forms (rutin, quercitrin) from food are better absorbed. Water-soluble glycosides extract in tea; aglycone extracts better in alcohol. Heat-stable: survives cooking. Drying preserves quercetin well. Gut bacteria deglycosylate quercetin glycosides for absorption. Onion skins contain 10× more quercetin than flesh.",
 
@@ -538,6 +548,27 @@ const SUBSTANCE_DESCRIPTIONS: Record<string, string> = {
 
   "Aconitine":
     "Diterpenoid alkaloid from aconite (Aconitum species). Extremely toxic — lethal dose ~2–5 mg. Activates voltage-gated sodium channels, causing persistent depolarization of cardiac and neural tissue. Traditional Chinese and Ayurvedic processing (prolonged boiling/steaming) reduces aconitine to less toxic aconine and benzoylaconine derivatives — processed aconite (fu zi / zhi fu zi) has 1/200th the toxicity of raw. Alcohol tincture of raw aconite is EXTREMELY dangerous. Drying does NOT reduce toxicity. Only used after extensive processing in traditional formulas by experienced practitioners. Homeopathic preparations are diluted beyond pharmacological activity.",
+
+  "Thymoquinone":
+    "Monoterpene phenol from Nigella sativa (black seed). Primary bioactive compound responsible for most of black seed's pharmacological effects. Potent antioxidant: scavenges superoxide and inhibits lipid peroxidation. Anti-inflammatory via NF-κB and MAPK pathway inhibition. Immunomodulatory: enhances NK cell activity and macrophage function. Also hepatoprotective and nephroprotective. Moderately heat-stable: survives gentle cooking but prolonged high heat degrades it. Cold-pressed black seed oil preserves thymoquinone well (typically 0.5–1.5%). Alcohol tincture extracts thymoquinone efficiently. Drying preserves it. Roasting seeds at high temperature reduces thymoquinone content significantly. Bioavailability improved by co-administration with lipids.",
+
+  "Anthraquinones":
+    "Aromatic compounds found in senna, aloe, rhubarb, and He Shou Wu (Polygonum multiflorum). Stimulant laxatives: emodin and chrysophanol activate chloride channels in colonocytes, increasing water secretion and peristalsis via myenteric plexus stimulation. In He Shou Wu, processing (steaming with black bean liquid) converts free anthraquinones to bound glycoside forms — reducing laxative effect while retaining tonic properties. Raw form is strongly laxative; processed form is blood-nourishing. Water-soluble: extract well in decoction. Alcohol tincture also effective. Drying preserves anthraquinones. Chronic use of stimulant anthraquinones can cause melanosis coli and electrolyte imbalance. Emodin has additional anti-inflammatory and hepatoprotective effects at low doses.",
+
+  "Tartaric acid":
+    "Alpha-hydroxy dicarboxylic acid, the dominant organic acid in tamarind fruit (up to 16% by weight). Responsible for tamarind's intensely sour taste. Antimicrobial: inhibits bacterial growth by acidifying the environment. Mild laxative via osmotic water retention in the intestinal lumen. Acts as a natural chelator of iron and calcium — can enhance or inhibit mineral absorption depending on context. Heat-stable: survives boiling and cooking completely. Water-soluble: extracts fully in decoction and juice. Drying preserves tartaric acid. Not significantly affected by fermentation. Also found in grapes (as potassium bitartrate/cream of tartar). Used commercially as an acidulant and antioxidant synergist in food preservation.",
+
+  "Diosgenin":
+    "Steroidal sapogenin found in wild yam (Dioscorea villosa) and fenugreek. The aglycone of dioscin. Structurally similar to cholesterol and steroid hormones. Historically used as the starting material for industrial synthesis of progesterone, cortisone, and other steroid drugs (Russell Marker, 1943). The human body CANNOT convert diosgenin to progesterone — it lacks the necessary enzymatic machinery, despite persistent marketing claims. Anti-inflammatory: inhibits NF-κB and COX-2 in vitro. Also antispasmodic on smooth muscle. Extracted by prolonged boiling/decoction (saponins require heat to release). Alcohol tincture extracts diosgenin moderately. Drying preserves diosgenin well. Acid hydrolysis of dioscin yields diosgenin.",
+
+  "Isothiocyanates":
+    "Sulfur-containing compounds formed from glucosinolate precursors by myrosinase enzyme when plant tissue is crushed or chewed. Found in moringa (moringa isothiocyanate/MIC), cruciferous vegetables (sulforaphane from broccoli). Potent activators of Nrf2 pathway — upregulate phase II detoxification enzymes (glutathione S-transferase, NQO1). Anti-inflammatory: inhibit NF-κB activation. Moringa isothiocyanate is notably stable compared to sulforaphane. Cooking destroys myrosinase, reducing isothiocyanate formation from intact glucosinolates — light steaming preserves some activity. Drying moringa leaves preserves glucosinolate precursors; reconstituting with water can reactivate conversion. Fermentation may produce isothiocyanates if myrosinase-producing bacteria are present.",
+
+  "Protodioscin":
+    "Steroidal furostanol saponin found in Tribulus terrestris fruit and fenugreek. The primary bioactive saponin in Tribulus. Converted in the body to dehydroepiandrosterone (DHEA) — though the clinical significance of this conversion is debated. Enhances nitric oxide synthase (eNOS) activity, improving vasodilation. Also increases androgen receptor density in some tissues. Anti-urolithic: reduces calcium oxalate crystal formation and aggregation (basis of kidney stone prevention use). Water-soluble glycoside: extracts in decoction. Alcohol tincture also effective. Drying preserves protodioscin. Heat-stable under normal cooking temperatures. Standardized Tribulus extracts are typically standardized to 40–60% saponins (primarily protodioscin).",
+
+  "Arjunolic acid":
+    "Oleanane-type triterpenoid found in Terminalia arjuna bark. Primary cardioactive compound. Cardioprotective: acts as a mild inotrope (strengthens heart contraction force) without increasing heart rate, via modulation of intracellular calcium handling. Also antioxidant — protects myocardial tissue from ischemia-reperfusion oxidative damage. Hypolipidemic: reduces LDL oxidation and total cholesterol. Mild ACE-inhibiting activity contributes to blood pressure reduction. Water-soluble: extracts well in decoction (traditional method). Alcohol tincture also effective. Traditional Ayurvedic Kshirapaka preparation (decoction in milk) enhances absorption of both arjunolic acid and accompanying triterpenoids. Drying preserves arjunolic acid well. Heat-stable.",
 };
 
 // ── Parser ───────────────────────────────────────────────────────────────────
@@ -721,6 +752,7 @@ class CompendiumParser {
     this.parseAppendixF();
     this.parseSynergyTables();
     this.parseCompoundReference();
+    this.addSupplementaryPlants();
     this.applySubstanceDescriptions();
     console.log(`  Plants:       ${this.plants.size}`);
     console.log(`  Conditions:   ${this.conditions.size}`);
@@ -1346,6 +1378,283 @@ class CompendiumParser {
       }
     }
     console.log(`  Substance descs: ${applied}/${this.substances.size}`);
+  }
+
+  // ── Add supplementary plants not in the AsciiDoc ─────────────────────────
+
+  private addSupplementaryPlants() {
+    const linkCondition = (plant: Plant, nameFragment: string) => {
+      const lower = nameFragment.toLowerCase();
+      for (const cond of this.conditions.values()) {
+        if (cond.name.toLowerCase().includes(lower)) {
+          this.plantConditions.add(`${plant.id}-${cond.id}`);
+          return;
+        }
+      }
+    };
+
+    const linkTradition = (plant: Plant, slug: string) => {
+      const tradition = this.traditions.get(slug);
+      if (tradition) this.plantTraditions.add(`${plant.id}-${tradition.id}`);
+    };
+
+    const linkPrep = (plant: Plant, slug: string) => {
+      const prep = this.preparations.get(slug);
+      if (prep) {
+        const key = `${plant.id}-${prep.id}`;
+        if (!this.plantPreparations.has(key)) this.plantPreparations.set(key, null);
+      }
+    };
+
+    const linkSubstance = (plant: Plant, name: string) => {
+      const sub = this.getOrCreateSubstance(name);
+      this.plantSubstances.add(`${plant.id}-${sub.id}`);
+    };
+
+    const linkCaution = (plant: Plant, slug: string) => {
+      const caution = this.cautions.get(slug);
+      if (caution) {
+        const key = `${plant.id}-${caution.id}`;
+        if (!this.plantCautions.has(key)) this.plantCautions.set(key, null);
+      }
+    };
+
+    const addSynergy = (plantA: Plant, plantB: Plant, effect: string, mechanism: string, tradition: string) => {
+      const [lowId, highId] = plantA.id < plantB.id ? [plantA.id, plantB.id] : [plantB.id, plantA.id];
+      const exists = this.synergies.some(s => s.plant_a_id === lowId && s.plant_b_id === highId);
+      if (!exists) {
+        this.synergies.push({ plant_a_id: lowId, plant_b_id: highId, mechanism, effect, tradition });
+      }
+    };
+
+    // Pre-lookup existing plants for synergies
+    const honey = this.findPlantByName("Honey");
+    const turmeric = this.findPlantByName("Turmeric");
+    const ashwagandha = this.findPlantByName("Ashwagandha");
+
+    // === 1. Black Seed ===
+    const blackSeed = this.findOrCreatePlant("Black Seed", "Nigella sativa", "Seeds");
+    blackSeed.alt_names = ["Habbatus Sauda (Arabic)", "Kalonji (Hindi/Urdu)", "Black Cumin", "Schwarzkümmel (German)"];
+    blackSeed.description = "Seeds used for immune support, digestive health, respiratory conditions, and inflammation. Traditionally chewed, ground with honey, or pressed for oil. The Prophet Muhammad (peace be upon him) described it as 'a cure for every disease except death.'";
+    blackSeed.historical = "One of the most historically significant medicinal seeds. Referenced in Hadith (Sahih Bukhari) as 'a cure for every disease except death.' Found in Tutankhamun's tomb (1323 BCE). Ibn Sina's Canon recommends it for respiratory conditions and lethargy. Extensively documented in Unani and Ayurvedic texts as Kalonji.";
+    linkTradition(blackSeed, "prophetic-medicine");
+    linkTradition(blackSeed, "ayurveda");
+    linkTradition(blackSeed, "unani");
+    linkCondition(blackSeed, "General Inflammation");
+    linkCondition(blackSeed, "Cough");
+    linkCondition(blackSeed, "Loss of Appetite");
+    linkCondition(blackSeed, "Headache");
+    linkPrep(blackSeed, "oil");
+    linkPrep(blackSeed, "powder");
+    linkPrep(blackSeed, "tea");
+    linkPrep(blackSeed, "chewing");
+    linkPrep(blackSeed, "paste");
+    linkSubstance(blackSeed, "Thymoquinone");
+    linkSubstance(blackSeed, "Volatile oils");
+    linkSubstance(blackSeed, "Flavonoids");
+    linkCaution(blackSeed, "pregnancy");
+    linkCaution(blackSeed, "blood-sugar");
+    linkCaution(blackSeed, "blood-thinners");
+    if (honey) {
+      addSynergy(blackSeed, honey, "Immune-boosting powerhouse; enhanced antimicrobial activity",
+        "Thymoquinone (TQ) activates TLR-mediated innate immune pathways; honey oligosaccharides are prebiotic and provide hydrogen peroxide-based antimicrobial activity; TQ's antioxidant effect synergizes with honey's flavonoid antioxidants",
+        "Prophetic Medicine");
+    }
+
+    // === 2. Amla ===
+    const amla = this.findOrCreatePlant("Amla", "Phyllanthus emblica", "Fruit");
+    amla.alt_names = ["Indian Gooseberry", "Amalaki (Sanskrit)", "Emblic Myrobalan", "Nelli (Tamil)"];
+    amla.description = "One of the three fruits in Triphala. Exceptionally high in vitamin C and antioxidants. Used for digestive health, immune support, hair and skin health, and as a general rejuvenative (rasayana) in Ayurveda.";
+    amla.historical = "Central to Ayurvedic medicine as one of the most important rasayanas (rejuvenatives). Key ingredient in Chyawanprash, the 2500-year-old tonic formula. The Charaka Samhita considers it the best among sour fruits and anti-aging herbs. Part of Triphala (three fruits) alongside haritaki and bibhitaki.";
+    linkTradition(amla, "ayurveda");
+    linkCondition(amla, "General Inflammation");
+    linkCondition(amla, "Loss of Appetite");
+    linkCondition(amla, "Sore Throat");
+    linkPrep(amla, "powder");
+    linkPrep(amla, "juice");
+    linkPrep(amla, "tea");
+    linkPrep(amla, "decoction");
+    linkSubstance(amla, "Ellagic acid");
+    linkSubstance(amla, "Quercetin");
+    linkSubstance(amla, "Tannins");
+    linkSubstance(amla, "Flavonoids");
+    linkCaution(amla, "blood-sugar");
+    linkCaution(amla, "gi-upset");
+    if (turmeric) {
+      addSynergy(amla, turmeric, "Enhanced anti-inflammatory; vitamin C improves curcumin stability",
+        "Ascorbic acid (amla) protects curcumin from oxidative degradation in the GI tract; ellagic acid and curcumin both inhibit NF-κB via different binding sites; amla's tannins slow gastric emptying, increasing curcumin contact time",
+        "Ayurveda");
+    }
+
+    // === 3. Guduchi ===
+    const guduchi = this.findOrCreatePlant("Guduchi", "Tinospora cordifolia", "Stem");
+    guduchi.alt_names = ["Giloy (Hindi)", "Amrita (Sanskrit)", "Heart-leaved Moonseed", "Seenthil (Tamil)"];
+    guduchi.description = "Known as 'Amrita' (divine nectar) in Ayurveda. Powerful immunomodulator used for chronic fever, liver support, and inflammatory conditions. The stem is the primary medicinal part, ideally harvested when climbing a neem tree (Neem-Giloy) for enhanced potency.";
+    guduchi.historical = "Referenced extensively in the Charaka Samhita and Sushruta Samhita. Called 'Amrita' meaning nectar of immortality, reflecting its status as one of Ayurveda's most valued herbs. Used for centuries for fever management (Jwarahara) and as a medhya rasayana (intellect rejuvenative).";
+    linkTradition(guduchi, "ayurveda");
+    linkCondition(guduchi, "General Inflammation");
+    linkCondition(guduchi, "Joint Pain");
+    linkPrep(guduchi, "decoction");
+    linkPrep(guduchi, "powder");
+    linkPrep(guduchi, "juice");
+    linkPrep(guduchi, "capsule");
+    linkSubstance(guduchi, "Berberine");
+    linkSubstance(guduchi, "Alkaloids");
+    linkSubstance(guduchi, "Flavonoids");
+    linkCaution(guduchi, "blood-sugar");
+    linkCaution(guduchi, "autoimmune-conditions");
+    linkCaution(guduchi, "pregnancy");
+    if (ashwagandha) {
+      addSynergy(guduchi, ashwagandha, "Immune modulation with adaptogenic stress support",
+        "Tinosporin and cordifolioside (guduchi) activate macrophages and increase IL-2/IFN-γ; withanolides (ashwagandha) modulate HPA axis and normalize cortisol, preventing stress-induced immunosuppression; complementary immuno-adaptogenic action",
+        "Ayurveda");
+    }
+
+    // === 4. Burdock ===
+    const burdock = this.findOrCreatePlant("Burdock", "Arctium lappa", "Root");
+    burdock.alt_names = ["Gobo (Japanese)", "Niúbàng (TCM)", "Greater Burdock", "Bardane (French)"];
+    burdock.description = "Root used for skin conditions, liver support, and as a gentle detoxifying agent. Rich in inulin (prebiotic fiber) and antioxidants. Traditional alterative ('blood purifier') in European and TCM traditions. Key ingredient in the Essiac formula.";
+    burdock.historical = "Used in European folk medicine since medieval times for skin eruptions and blood purification. Part of the Essiac formula popularized in the 1920s. In TCM, the seeds (niúbàng zi) treat sore throat and skin conditions. Widely cultivated in Japan as gobo, a staple root vegetable prized for its earthy flavor and prebiotic benefits.";
+    linkTradition(burdock, "european-herbalism");
+    linkTradition(burdock, "traditional-chinese-medicine");
+    linkCondition(burdock, "General Inflammation");
+    linkCondition(burdock, "Joint Pain");
+    linkCondition(burdock, "Sore Throat");
+    linkPrep(burdock, "decoction");
+    linkPrep(burdock, "tea");
+    linkPrep(burdock, "tincture");
+    linkPrep(burdock, "poultice");
+    linkSubstance(burdock, "Inulin");
+    linkSubstance(burdock, "Quercetin");
+    linkSubstance(burdock, "Flavonoids");
+    linkCaution(burdock, "pregnancy");
+    linkCaution(burdock, "allergic-reactions");
+
+    // === 5. He Shou Wu ===
+    const heShouWu = this.findOrCreatePlant("He Shou Wu", "Reynoutria multiflora", "Root (processed)");
+    heShouWu.alt_names = ["Fo-Ti", "Fleeceflower Root", "Polygonum multiflorum"];
+    heShouWu.description = "One of TCM's premier longevity and blood-building herbs. The processed (zhì) form, steamed with black bean liquid, is used for premature graying, liver and kidney yin deficiency, and blood nourishment. Raw form is a laxative with entirely different properties — the two forms are not interchangeable.";
+    heShouWu.historical = "Named after a legendary man whose gray hair returned to black after consuming it. One of the most prized tonic herbs in TCM, featured prominently in Ben Cao Gang Mu by Li Shizhen. The processing method (nine cycles of steaming with black bean liquid) is considered essential for transforming its therapeutic nature from laxative to blood-nourishing tonic.";
+    linkTradition(heShouWu, "traditional-chinese-medicine");
+    linkCondition(heShouWu, "Poor Circulation");
+    linkCondition(heShouWu, "General Inflammation");
+    linkPrep(heShouWu, "decoction");
+    linkPrep(heShouWu, "powder");
+    linkPrep(heShouWu, "tincture");
+    linkPrep(heShouWu, "capsule");
+    linkSubstance(heShouWu, "Resveratrol");
+    linkSubstance(heShouWu, "Anthraquinones");
+    linkSubstance(heShouWu, "Flavonoids");
+    linkCaution(heShouWu, "liver-conditions");
+    linkCaution(heShouWu, "pregnancy");
+    linkCaution(heShouWu, "drug-interactions");
+
+    // === 6. Tamarind ===
+    const tamarind = this.findOrCreatePlant("Tamarind", "Tamarindus indica", "Fruit pulp");
+    tamarind.alt_names = ["Imli (Hindi/Urdu)", "Tamr Hindi (Arabic)", "Asam (Malay)", "Tamarindo (Spanish)"];
+    tamarind.description = "Fruit pulp used as a digestive aid, gentle laxative, and cooling agent for fever. Rich in tartaric acid, giving it its distinctive sour taste. The leaves and bark have additional antimicrobial properties. A culinary-medicinal plant bridging food and pharmacy across tropical traditions.";
+    tamarind.historical = "One of the few plants used medicinally across African, Asian, and American tropical traditions independently. The name derives from Arabic 'tamr hindī' (Indian date). Referenced in Ayurvedic texts for digestive disorders and fever. Unani texts use it as a cooling agent for bilious conditions. In African traditional medicine, leaf decoctions treat malaria and fever.";
+    linkTradition(tamarind, "ayurveda");
+    linkTradition(tamarind, "unani");
+    linkCondition(tamarind, "Nausea");
+    linkCondition(tamarind, "Loss of Appetite");
+    linkCondition(tamarind, "General Inflammation");
+    linkPrep(tamarind, "decoction");
+    linkPrep(tamarind, "juice");
+    linkPrep(tamarind, "paste");
+    linkSubstance(tamarind, "Tartaric acid");
+    linkSubstance(tamarind, "Flavonoids");
+    linkSubstance(tamarind, "Tannins");
+    linkCaution(tamarind, "blood-sugar");
+    linkCaution(tamarind, "gi-upset");
+    linkCaution(tamarind, "drug-interactions");
+
+    // === 7. Moringa ===
+    const moringa = this.findOrCreatePlant("Moringa", "Moringa oleifera", "Leaves, Seeds");
+    moringa.alt_names = ["Drumstick Tree", "Sahajan (Hindi)", "Ben Oil Tree", "Miracle Tree"];
+    moringa.description = "One of the most nutrient-dense plants known — every part is used medicinally. Leaves are exceptionally rich in vitamins, minerals, and complete protein. Used for malnutrition, inflammation, blood sugar regulation, and as a galactagogue (milk production stimulant).";
+    moringa.historical = "Called 'the miracle tree' for its extraordinary nutritional density. Used in Ayurveda for over 4000 years, classified as both food and medicine. Referenced in Siddha medicine as Sigru. Now cultivated globally in nutrition programs across developing countries due to fast growth, drought tolerance, and exceptional nutrient profile.";
+    linkTradition(moringa, "ayurveda");
+    linkCondition(moringa, "General Inflammation");
+    linkCondition(moringa, "Joint Pain");
+    linkCondition(moringa, "Loss of Appetite");
+    linkPrep(moringa, "powder");
+    linkPrep(moringa, "tea");
+    linkPrep(moringa, "capsule");
+    linkPrep(moringa, "oil");
+    linkSubstance(moringa, "Quercetin");
+    linkSubstance(moringa, "Kaempferol");
+    linkSubstance(moringa, "Isothiocyanates");
+    linkCaution(moringa, "pregnancy");
+    linkCaution(moringa, "blood-sugar");
+    linkCaution(moringa, "blood-pressure");
+
+    // === 8. Wild Yam ===
+    const wildYam = this.findOrCreatePlant("Wild Yam", "Dioscorea villosa", "Root/Rhizome");
+    wildYam.alt_names = ["Colic Root", "Mexican Wild Yam", "Rheumatism Root"];
+    wildYam.description = "Root used traditionally for menstrual cramps, digestive colic, and inflammatory conditions. Contains diosgenin, a steroidal saponin used as a pharmaceutical precursor. Note: despite marketing claims, the human body cannot convert diosgenin to progesterone — it lacks the necessary enzymes.";
+    wildYam.historical = "Used by Native Americans and later Eclectic physicians for colic and menstrual pain. Diosgenin from wild yam was the starting material for Russell Marker's landmark 1943 synthesis of progesterone, launching the pharmaceutical steroid industry and enabling the contraceptive pill — making it one of the most commercially significant medicinal plants in history.";
+    linkTradition(wildYam, "european-herbalism");
+    linkCondition(wildYam, "Menstrual Pain");
+    linkCondition(wildYam, "Joint Pain");
+    linkCondition(wildYam, "General Inflammation");
+    linkPrep(wildYam, "decoction");
+    linkPrep(wildYam, "tincture");
+    linkPrep(wildYam, "capsule");
+    linkPrep(wildYam, "cream");
+    linkSubstance(wildYam, "Diosgenin");
+    linkSubstance(wildYam, "Saponins");
+    linkCaution(wildYam, "pregnancy");
+    linkCaution(wildYam, "estrogenic-effects");
+    linkCaution(wildYam, "gi-upset");
+
+    // === 9. Tribulus ===
+    const tribulus = this.findOrCreatePlant("Tribulus", "Tribulus terrestris", "Fruit, Root");
+    tribulus.alt_names = ["Gokshura (Ayurveda)", "Puncture Vine", "Caltrop", "Bai Ji Li (TCM)"];
+    tribulus.description = "Fruit and root used for urinary tract health, kidney stone prevention, and traditionally for vitality. Contains steroidal saponins including protodioscin. Used in Ayurveda primarily as a mutrala (urinary tonic) and in TCM for liver qi stagnation and eye conditions.";
+    tribulus.historical = "One of the few plants used across Ayurveda, Unani, and TCM for similar indications. Ayurvedic texts classify Gokshura as a rasayana for the urinary and reproductive systems. In TCM, Bai Ji Li is used for liver qi stagnation and eye conditions. Bulgarian research in the 1990s popularized it globally as a sports supplement.";
+    linkTradition(tribulus, "ayurveda");
+    linkTradition(tribulus, "unani");
+    linkTradition(tribulus, "traditional-chinese-medicine");
+    linkCondition(tribulus, "General Inflammation");
+    linkCondition(tribulus, "Joint Pain");
+    linkPrep(tribulus, "powder");
+    linkPrep(tribulus, "decoction");
+    linkPrep(tribulus, "capsule");
+    linkPrep(tribulus, "tincture");
+    linkSubstance(tribulus, "Protodioscin");
+    linkSubstance(tribulus, "Saponins");
+    linkSubstance(tribulus, "Flavonoids");
+    linkCaution(tribulus, "pregnancy");
+    linkCaution(tribulus, "blood-sugar");
+    linkCaution(tribulus, "kidney-conditions");
+
+    // === 10. Arjuna ===
+    const arjuna = this.findOrCreatePlant("Arjuna", "Terminalia arjuna", "Bark");
+    arjuna.alt_names = ["Arjun Tree", "Kakubha (Sanskrit)", "Nadisarjja", "Marudhu (Tamil)"];
+    arjuna.description = "Bark used as the premier cardiac tonic in Ayurveda. Strengthens heart muscle, regulates blood pressure, reduces cholesterol, and acts as a mild diuretic. Traditionally prepared as a decoction in milk (Kshirapaka) for enhanced absorption of cardioprotective compounds.";
+    arjuna.historical = "Named after the Mahabharata warrior Arjuna, symbolizing strength and protection. Referenced in the Ashtanga Hridaya and Charaka Samhita as the primary heart tonic (Hridayottama). Vagbhata specifically prescribed Arjuna bark decoction in milk for heart disease. Modern clinical trials confirm cardioprotective effects including reduced angina frequency and improved ejection fraction.";
+    linkTradition(arjuna, "ayurveda");
+    linkCondition(arjuna, "Poor Circulation");
+    linkCondition(arjuna, "General Inflammation");
+    linkPrep(arjuna, "decoction");
+    linkPrep(arjuna, "powder");
+    linkPrep(arjuna, "capsule");
+    linkSubstance(arjuna, "Arjunolic acid");
+    linkSubstance(arjuna, "Tannins");
+    linkSubstance(arjuna, "Flavonoids");
+    linkSubstance(arjuna, "Saponins");
+    linkCaution(arjuna, "blood-pressure");
+    linkCaution(arjuna, "heart-conditions");
+    linkCaution(arjuna, "blood-thinners");
+    linkCaution(arjuna, "pregnancy");
+    if (ashwagandha) {
+      addSynergy(arjuna, ashwagandha, "Cardioprotective with stress-adaptation support",
+        "Arjunolic acid strengthens myocardial tissue and reduces oxidative stress on cardiac cells; withanolides modulate the HPA axis reducing cortisol-mediated cardiovascular strain; combined effect reduces both mechanical and neuroendocrine cardiac stressors",
+        "Ayurveda");
+    }
+
+    console.log(`  Supplementary plants: 10 added`);
   }
 
   // ── Build output ──────────────────────────────────────────────────────────

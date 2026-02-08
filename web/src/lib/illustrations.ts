@@ -103,4 +103,16 @@ export const PLANT_ILLUSTRATIONS: Record<string, string> = {
   "neem": "https://commons.wikimedia.org/wiki/Special:FilePath/Margosa%20%28Azadirachta%20indica%20A.%20Juss.%29%3B%20branch%20with%20flowers%20a%20Wellcome%20V0042617.jpg?width=400",
   "papaya": "https://commons.wikimedia.org/wiki/Special:FilePath/Illustrations%20of%20Indian%20Botany%2C%20Vol.%202%20%28page%2081%20crop%29.jpg?width=400",
   "rauwolfia": "https://commons.wikimedia.org/wiki/Special:FilePath/Indian%20Snakeroot%20or%20Java%20Devilpepper%20%28Rauvolfia%20serpentina%20%28%20Wellcome%20V0042670.jpg?width=400",
+
+  // Supplementary plants — public domain botanical illustrations
+  "black-seed": "https://commons.wikimedia.org/wiki/Special:FilePath/Nigella%20sativa%20-%20K%C3%B6hler%E2%80%93s%20Medizinal-Pflanzen-227.jpg?width=400",
+  "amla": "https://commons.wikimedia.org/wiki/Special:FilePath/Phyllanthus%20emblica%20Bra52.png?width=400",
+  "guduchi": "https://commons.wikimedia.org/wiki/Special:FilePath/Indian%20Medicinal%20Plants%20-%20Plate%2035%20-%20Tinospora%20cordifolia.jpg?width=400",
+  "burdock": "https://commons.wikimedia.org/wiki/Special:FilePath/Arctium%20lappa%20botanilac%20illustration.jpg?width=400",
+  "he-shou-wu": "https://commons.wikimedia.org/wiki/Special:FilePath/%E6%A4%8D%E7%89%A9%E5%90%8D%E5%AF%A6%E5%9C%96%E8%80%83%C2%B7%E4%BD%95%E9%A6%96%E7%83%8F.jpg?width=400",
+  "tamarind": "https://commons.wikimedia.org/wiki/Special:FilePath/Tamarindus%20indica%20-%20K%C3%B6hler%E2%80%93s%20Medizinal-Pflanzen-134.jpg?width=400",
+  "moringa": "https://commons.wikimedia.org/wiki/Special:FilePath/Moringa%20oleifera%20Blanco1.125.png?width=400",
+  "wild-yam": "https://commons.wikimedia.org/wiki/Special:FilePath/NIE%20Yam%20-%20Dioscorea%20villosa.jpg?width=400",
+  "tribulus": "https://commons.wikimedia.org/wiki/Special:FilePath/Tribulus%20terrestris.svg?width=400",
+  "arjuna": "https://commons.wikimedia.org/wiki/Special:FilePath/Terminalia%20arjuna%20Govindoo.jpg?width=400",
 };
