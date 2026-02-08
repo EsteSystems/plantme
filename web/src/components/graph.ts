@@ -180,6 +180,40 @@ export function createGraph(
     options.onNodeClick?.(d.id);
   });
 
+  // Fit graph to viewport after simulation stabilises
+  function zoomToFit() {
+    if (nodes.length === 0) return;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const n of nodes) {
+      if (n.x == null || n.y == null) continue;
+      const r = nodeRadius(n);
+      if (n.x - r < x0) x0 = n.x - r;
+      if (n.y - r < y0) y0 = n.y - r;
+      if (n.x + r > x1) x1 = n.x + r;
+      if (n.y + r > y1) y1 = n.y + r;
+    }
+    const bw = x1 - x0;
+    const bh = y1 - y0;
+    if (bw <= 0 || bh <= 0) return;
+    const padding = 40;
+    const scale = Math.min(
+      (width - padding * 2) / bw,
+      (height - padding * 2) / bh,
+      1.5 // don't zoom in too much for small graphs
+    );
+    const cx = (x0 + x1) / 2;
+    const cy = (y0 + y1) / 2;
+    const tx = width / 2 - cx * scale;
+    const ty = height / 2 - cy * scale;
+    svg
+      .transition()
+      .duration(750)
+      .call(
+        zoom.transform,
+        d3.zoomIdentity.translate(tx, ty).scale(scale)
+      );
+  }
+
   // Tick
   simulation.on("tick", () => {
     link
@@ -192,6 +226,9 @@ export function createGraph(
 
     label.attr("x", (d) => d.x!).attr("y", (d) => d.y!);
   });
+
+  // Zoom to fit once simulation cools down
+  simulation.on("end", zoomToFit);
 
   function filterNodes(visibleIds: Set<string> | null) {
     if (!visibleIds) {
