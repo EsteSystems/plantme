@@ -1050,12 +1050,13 @@ class CompendiumParser {
       }
 
       if (inTable && line.startsWith("|") && !isHeaderRow) {
-        // Parse table row: |Combination |Ratio |Synergic Effect |Traditions
+        // Parse table row: |Combination |Ratio |Synergic Effect |Mechanism |Traditions
         const cells = line.split("|").filter(Boolean).map((c) => cleanAsciiDoc(c.trim()));
         if (cells.length >= 3) {
           const combo = cells[0];
           const effect = cells[2] || null;
-          const tradition = cells.length >= 4 ? cells[3] : null;
+          const mechanism = cells.length >= 5 ? (cells[3] || null) : null;
+          const tradition = cells.length >= 5 ? cells[4] : (cells.length >= 4 ? cells[3] : null);
 
           // Extract plant names from combination
           const plantNames = this.extractPlantNamesFromCombo(combo);
@@ -1078,7 +1079,7 @@ class CompendiumParser {
                     this.synergies.push({
                       plant_a_id: lowId,
                       plant_b_id: highId,
-                      mechanism: null,
+                      mechanism,
                       effect,
                       tradition,
                     });

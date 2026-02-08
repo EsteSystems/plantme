@@ -96,19 +96,48 @@ export function renderPlantDetailPage(slug: string): () => void {
     // Synergies
     if (plant.synergies.length > 0) {
       const section = createSectionShell("Synergies");
-      const grid = document.createElement("div");
-      grid.className = "plant-grid";
       for (const syn of plant.synergies) {
-        grid.appendChild(
-          createPlantCard({
-            slug: syn.slug,
-            name: syn.name,
-            scientific: syn.scientific,
-            description: syn.effect,
-          })
-        );
+        const card = document.createElement("div");
+        card.className = "synergy-card";
+
+        const header = document.createElement("div");
+        header.className = "synergy-card__header";
+        const link = document.createElement("a");
+        link.href = `/plant/${syn.slug}`;
+        link.setAttribute("data-route", "");
+        link.className = "synergy-card__name";
+        link.textContent = syn.name;
+        header.appendChild(link);
+        if (syn.tradition) {
+          const trad = document.createElement("span");
+          trad.className = "synergy-card__tradition";
+          trad.textContent = syn.tradition;
+          header.appendChild(trad);
+        }
+        card.appendChild(header);
+
+        if (syn.effect) {
+          const effect = document.createElement("p");
+          effect.className = "synergy-card__effect";
+          effect.textContent = syn.effect;
+          card.appendChild(effect);
+        }
+
+        if (syn.mechanism) {
+          const mech = document.createElement("div");
+          mech.className = "synergy-card__mechanism";
+          const mechLabel = document.createElement("span");
+          mechLabel.className = "synergy-card__mechanism-label";
+          mechLabel.textContent = "Biochemistry: ";
+          const mechText = document.createElement("span");
+          mechText.textContent = syn.mechanism;
+          mech.appendChild(mechLabel);
+          mech.appendChild(mechText);
+          card.appendChild(mech);
+        }
+
+        section.appendChild(card);
       }
-      section.appendChild(grid);
       app.appendChild(section);
     }
 

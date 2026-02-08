@@ -25,7 +25,7 @@ export interface PlantDetail extends PlantSummary {
   preparations: { slug: string; name: string; instructions: string | null }[];
   substances: { slug: string; name: string }[];
   cautions: { slug: string; name: string; severity: string; detail: string | null }[];
-  synergies: { slug: string; name: string; scientific: string | null; effect: string | null }[];
+  synergies: { slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null }[];
 }
 
 export interface ConditionDetail {

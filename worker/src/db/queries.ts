@@ -103,11 +103,11 @@ export async function getPlantCautions(db: D1Database, plantId: number) {
 
 export async function getPlantSynergies(db: D1Database, plantId: number) {
   return db.prepare(`
-    SELECT p.slug, p.name, p.scientific, s.effect
+    SELECT p.slug, p.name, p.scientific, s.effect, s.mechanism, s.tradition
     FROM synergies s
     JOIN plants p ON (CASE WHEN s.plant_a_id = ? THEN s.plant_b_id ELSE s.plant_a_id END) = p.id
     WHERE s.plant_a_id = ? OR s.plant_b_id = ?
-  `).bind(plantId, plantId, plantId).all<{ slug: string; name: string; scientific: string | null; effect: string | null }>();
+  `).bind(plantId, plantId, plantId).all<{ slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null }>();
 }
 
 // ── Conditions ───────────────────────────────────────────────────────────────

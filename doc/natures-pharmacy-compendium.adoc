@@ -12317,88 +12317,88 @@ The following combinations represent plant pairings where the therapeutic effect
 
 ===== Digestive Synergies
 
-[width="100%",cols="28%,14%,34%,24%",options="header",]
+[width="100%",cols="20%,10%,25%,25%,20%",options="header",]
 |===
-|Combination |Ratio |Synergic Effect |Traditions
-|*Cumin {plus} Coriander {plus} Fennel* (CCF Tea) |Equal parts |Balanced digestive support—cumin stimulates, coriander cools, fennel soothes |Ayurveda
-|*Ginger {plus} Cardamom* |2:1 |Cardamom balances ginger’s heat; both anti-nausea |Ayurveda, Unani
-|*Ginger {plus} Clove* |2:1 |Synergistic anti-nausea for cold stomach patterns |TCM, Ayurveda
-|*Senna {plus} Ginger/Fennel* |Senna {plus} small amount carminative |Prevents griping cramps from senna |Unani, European
-|*Triphala* (Amalaki {plus} Bibhitaki {plus} Haritaki) |Equal parts |Balances all three doshas; gentle long-term bowel tonic |Ayurveda
-|*Asafoetida {plus} Cumin {plus} Ginger* |Pinch {plus} 1tsp {plus} 1tsp |Triple carminative for severe bloating from legumes |Ayurveda
+|Combination |Ratio |Synergic Effect |Mechanism |Traditions
+|*Cumin {plus} Coriander {plus} Fennel* (CCF Tea) |Equal parts |Balanced digestive support—cumin stimulates, coriander cools, fennel soothes |Cuminaldehyde stimulates digestive enzyme secretion; linalool (coriander) is antispasmodic on GI smooth muscle; anethole (fennel) relaxes intestinal musculature via calcium channel modulation |Ayurveda
+|*Ginger {plus} Cardamom* |2:1 |Cardamom balances ginger's heat; both anti-nausea |Gingerols antagonize 5-HT3 serotonin receptors (anti-emetic); 1,8-cineole (cardamom) exerts prokinetic activity; cardamom terpenes moderate ginger thermogenesis |Ayurveda, Unani
+|*Ginger {plus} Clove* |2:1 |Synergistic anti-nausea for cold stomach patterns |Gingerols block 5-HT3 receptors; eugenol inhibits COX-2 and enhances gastric motility via cholinergic pathways |TCM, Ayurveda
+|*Senna {plus} Ginger/Fennel* |Senna {plus} small amount carminative |Prevents griping cramps from senna |Sennosides activate myenteric plexus peristalsis; gingerols and anethole provide carminative antispasmodic action, preventing excessive smooth muscle contraction |Unani, European
+|*Triphala* (Amalaki {plus} Bibhitaki {plus} Haritaki) |Equal parts |Balances all three doshas; gentle long-term bowel tonic |Gallic acid and chebulinic acid provide gentle prokinetic and antioxidant effects; chebulagic acid (haritaki) stimulates motility while emblicanin (amalaki) protects gastric mucosa |Ayurveda
+|*Asafoetida {plus} Cumin {plus} Ginger* |Pinch {plus} 1tsp {plus} 1tsp |Triple carminative for severe bloating from legumes |Ferulic acid derivatives (asafoetida) inhibit gas-producing bacterial enzymes; cuminaldehyde stimulates bile secretion; gingerols accelerate gastric emptying via cholinergic pathways |Ayurveda
 |===
 
 ===== Respiratory Synergies
 
-[width="100%",cols="28%,14%,34%,24%",options="header",]
+[width="100%",cols="20%,10%,25%,25%,20%",options="header",]
 |===
-|Combination |Ratio |Synergic Effect |Traditions
-|*Elderflower {plus} Peppermint {plus} Yarrow* |Equal parts |Classic diaphoretic fever tea—promotes sweating from three angles |European
-|*Honey {plus} Ginger* |2:1 |Soothing {plus} warming for cough; honey carries ginger’s compounds |Universal
-|*Honey {plus} Black Pepper* |Honey {plus} pinch pepper |Respiratory congestion; pepper enhances mucolytic effect |Ayurveda
-|*Thyme {plus} Elecampane* |Equal parts |Acute {plus} chronic bronchitis—expectorant {plus} antimicrobial synergy |European
-|*Turmeric {plus} Black Pepper {plus} Fat* |Turmeric {plus} pinch pepper {plus} oil/ghee |Piperine increases curcumin absorption by 2000% |Ayurveda
-|*Ginger {plus} Tulsi (Holy Basil)* |Equal parts |Respiratory congestion with immune support |Ayurveda
-|*Onion {plus} Honey* (syrup) |Layer sliced onion with honey |Mucolytic {plus} antimicrobial for productive cough |European folk
+|Combination |Ratio |Synergic Effect |Mechanism |Traditions
+|*Elderflower {plus} Peppermint {plus} Yarrow* |Equal parts |Classic diaphoretic fever tea—promotes sweating from three angles |Sambucus flavonoids promote diaphoresis; menthol activates TRPM8 cold receptors while promoting peripheral vasodilation; achillein induces perspiration via vasodilatory action |European
+|*Honey {plus} Ginger* |2:1 |Soothing {plus} warming for cough; honey carries ginger's compounds |Honey suppresses cough reflex via opioidergic pathways and soothes mucosa osmotically; gingerols and shogaols exert bronchodilatory and anti-tussive effects |Universal
+|*Honey {plus} Black Pepper* |Honey {plus} pinch pepper |Respiratory congestion; pepper enhances mucolytic effect |Piperine activates TRPV1 receptors in airways, triggering mucolytic secretion; honey provides demulcent coating and H2O2-mediated antibacterial activity |Ayurveda
+|*Thyme {plus} Elecampane* |Equal parts |Acute {plus} chronic bronchitis—expectorant {plus} antimicrobial synergy |Thymol and carvacrol disrupt bacterial cell membranes and act as bronchospasmolytic agents; alantolactone (sesquiterpene lactone from elecampane) is expectorant and antimycobacterial |European
+|*Turmeric {plus} Black Pepper {plus} Fat* |Turmeric {plus} pinch pepper {plus} oil/ghee |Piperine increases curcumin absorption by 2000% |Piperine inhibits hepatic and intestinal glucuronidation of curcumin, blocking first-pass metabolism; lipids enhance absorption via micellar solubilization in the small intestine |Ayurveda
+|*Ginger {plus} Tulsi (Holy Basil)* |Equal parts |Respiratory congestion with immune support |Gingerols reduce bronchospasm via calcium channel inhibition; eugenol and rosmarinic acid (tulsi) modulate immune response through COX-2 and 5-LOX inhibition |Ayurveda
+|*Onion {plus} Honey* (syrup) |Layer sliced onion with honey |Mucolytic {plus} antimicrobial for productive cough |Quercetin and thiosulfinates (onion) break down mucus glycoproteins and inhibit bacterial growth; honey adds osmotic demulcent action with H2O2-mediated antibacterial activity |European folk
 |===
 
 ===== Pain & Anti-Inflammatory Synergies
 
-[width="100%",cols="28%,14%,34%,24%",options="header",]
+[width="100%",cols="20%,10%,25%,25%,20%",options="header",]
 |===
-|Combination |Ratio |Synergic Effect |Traditions
-|*Turmeric {plus} Boswellia* |Equal parts |Complementary anti-inflammatory pathways (COX {plus} LOX inhibition) |Ayurveda
-|*Turmeric {plus} Ginger* |Equal parts |Dual anti-inflammatory; ginger aids turmeric absorption |Ayurveda, TCM
-|*Willow Bark {plus} Meadowsweet* |Equal parts |Complementary salicylates with buffering |European
-|*Valerian {plus} Cramp Bark* |Equal parts |Muscle relaxation {plus} antispasmodic for tension pain |European, Native American
-|*Cayenne {plus} Ginger {plus} Camphor* (topical) |Warming liniment |Deep-penetrating warmth for muscular/joint pain |American folk
+|Combination |Ratio |Synergic Effect |Mechanism |Traditions
+|*Turmeric {plus} Boswellia* |Equal parts |Complementary anti-inflammatory pathways (COX {plus} LOX inhibition) |Curcumin inhibits COX-2 and NF-kB transcription factor; AKBA (acetyl-11-keto-beta-boswellic acid) selectively inhibits 5-lipoxygenase; dual pathway blockade reduces both prostaglandins and leukotrienes simultaneously |Ayurveda
+|*Turmeric {plus} Ginger* |Equal parts |Dual anti-inflammatory; ginger aids turmeric absorption |Curcumin inhibits COX-2 and NF-kB; gingerols suppress prostaglandin and leukotriene synthesis via separate binding sites; gingerols also inhibit intestinal glucuronidation, improving curcumin bioavailability |Ayurveda, TCM
+|*Willow Bark {plus} Meadowsweet* |Equal parts |Complementary salicylates with buffering |Both contain salicin, converted to salicylic acid in vivo (COX inhibitor); meadowsweet tannins and mucilage buffer gastric mucosa, reducing the GI irritation typical of salicylate therapy |European
+|*Valerian {plus} Cramp Bark* |Equal parts |Muscle relaxation {plus} antispasmodic for tension pain |Valerenic acid is a positive allosteric modulator of GABA-A receptors (central muscle relaxation); scopoletin and viopudial (cramp bark) directly relax smooth muscle via calcium channel blockade |European, Native American
+|*Cayenne {plus} Ginger {plus} Camphor* (topical) |Warming liniment |Deep-penetrating warmth for muscular/joint pain |Capsaicin depletes substance P from C-fiber nociceptors (counterirritant analgesia); gingerols inhibit COX-2 locally and increase blood flow; camphor activates TRPV3 and TRPM8 channels producing analgesic warming sensation |American folk
 |===
 
 ===== Immune & Tonic Synergies
 
-[width="100%",cols="28%,14%,34%,24%",options="header",]
+[width="100%",cols="20%,10%,25%,25%,20%",options="header",]
 |===
-|Combination |Ratio |Synergic Effect |Traditions
-|*Astragalus {plus} Reishi* |Equal parts |Immune modulation {plus} immune building (preventive use only) |TCM
-|*Elderberry {plus} Echinacea* |Elderberry base {plus} Echinacea |Antiviral {plus} immune stimulant at infection onset |Western herbalism
-|*Garlic {plus} Honey* |Crushed garlic in honey |Antimicrobial synergy; honey preserves allicin; easier to take |Universal
-|*Ashwagandha {plus} Warm Milk {plus} Honey* |3-6g powder in milk |Traditional rasayana delivery—fat aids absorption, calming vehicle |Ayurveda
-|*Nettle {plus} Rose Hips* |Equal parts |Iron-rich {plus} Vitamin C = enhanced iron absorption |European
-|*Yellow Dock {plus} Blackstrap Molasses* |Dock syrup in molasses |Combined iron sources for anemia |American folk
+|Combination |Ratio |Synergic Effect |Mechanism |Traditions
+|*Astragalus {plus} Reishi* |Equal parts |Immune modulation {plus} immune building (preventive use only) |Astragaloside IV upregulates T-cell and NK-cell activity via MAPK signaling; beta-glucan polysaccharides (reishi) activate macrophages through Dectin-1 and complement receptor 3 pathways |TCM
+|*Elderberry {plus} Echinacea* |Elderberry base {plus} Echinacea |Antiviral {plus} immune stimulant at infection onset |Anthocyanins and lectins (elderberry) inhibit viral neuraminidase and hemagglutinin binding; alkylamides and polysaccharides (echinacea) stimulate phagocytosis and increase TNF-alpha and IL-1 production |Western herbalism
+|*Garlic {plus} Honey* |Crushed garlic in honey |Antimicrobial synergy; honey preserves allicin; easier to take |Allicin (diallyl thiosulfinate) disrupts bacterial membrane integrity via thiol-disulfide exchange; honey provides H2O2-mediated antimicrobial action and low pH environment that preserves allicin stability |Universal
+|*Ashwagandha {plus} Warm Milk {plus} Honey* |3-6g powder in milk |Traditional rasayana delivery—fat aids absorption, calming vehicle |Withanolides are lipophilic—milk fats enhance oral absorption via micellar transport; casein-derived peptides in milk provide mild sedative synergy via opioid receptor activity |Ayurveda
+|*Nettle {plus} Rose Hips* |Equal parts |Iron-rich {plus} Vitamin C = enhanced iron absorption |Non-heme iron from nettle (ferric form); ascorbic acid from rose hips (400{plus} mg/100g) reduces Fe3{plus} to Fe2{plus} in the gut lumen, dramatically increasing iron bioavailability across intestinal enterocytes |European
+|*Yellow Dock {plus} Blackstrap Molasses* |Dock syrup in molasses |Combined iron sources for anemia |Anthraquinone glycosides (yellow dock) stimulate bile flow and enhance intestinal iron uptake; molasses provides bioavailable ferrous iron plus B-vitamins (B6, folate) as cofactors for hemoglobin synthesis |American folk
 |===
 
 ===== Nervous System Synergies
 
-[width="100%",cols="28%,14%,34%,24%",options="header",]
+[width="100%",cols="20%,10%,25%,25%,20%",options="header",]
 |===
-|Combination |Ratio |Synergic Effect |Traditions
-|*Valerian {plus} Hops* |Equal parts |Classic European sleep formula; complementary sedation |European
-|*Valerian {plus} Passionflower {plus} Lemon Balm* |Equal parts |Triple nervine for anxiety with sleep disturbance |Western herbalism
-|*Ashwagandha {plus} Rhodiola* |Equal parts |Calming adaptogen {plus} stimulating adaptogen = balanced resilience |Modern integrative
-|*Ginkgo {plus} Bacopa* |Equal parts |Cerebrovascular {plus} nootropic for cognitive support |Ayurveda {plus} TCM
-|*Chamomile {plus} Lemon Balm {plus} Lavender* |Equal parts |Gentle calming tea safe for children and sensitive people |European
+|Combination |Ratio |Synergic Effect |Mechanism |Traditions
+|*Valerian {plus} Hops* |Equal parts |Classic European sleep formula; complementary sedation |Valerenic acid is a positive allosteric modulator of GABA-A receptors; 2-methyl-3-buten-2-ol (hops degradation product of alpha-acids) acts as a direct GABA-A agonist; complementary GABAergic sedation at distinct binding sites |European
+|*Valerian {plus} Passionflower {plus} Lemon Balm* |Equal parts |Triple nervine for anxiety with sleep disturbance |Valerenic acid modulates GABA-A receptors; chrysin and apigenin (passionflower) act as partial agonists at the benzodiazepine binding site; rosmarinic acid (lemon balm) inhibits GABA-transaminase, increasing synaptic GABA concentration |Western herbalism
+|*Ashwagandha {plus} Rhodiola* |Equal parts |Calming adaptogen {plus} stimulating adaptogen = balanced resilience |Withanolides modulate cortisol via HPA-axis normalization (calming); rosavins and salidroside (rhodiola) stimulate monoamine neurotransmitter activity and inhibit MAO (energizing); opposing stress-axis modulation creates balanced adaptogenesis |Modern integrative
+|*Ginkgo {plus} Bacopa* |Equal parts |Cerebrovascular {plus} nootropic for cognitive support |Ginkgolides inhibit platelet-activating factor (PAF) and increase cerebral blood flow via nitric oxide modulation; bacosides enhance synaptic protein kinase activity and serotonergic transmission, improving memory consolidation and recall |Ayurveda {plus} TCM
+|*Chamomile {plus} Lemon Balm {plus} Lavender* |Equal parts |Gentle calming tea safe for children and sensitive people |Apigenin (chamomile) binds GABA-A benzodiazepine receptors with anxiolytic effect; rosmarinic acid (lemon balm) inhibits GABA-transaminase; linalool (lavender) modulates glutamate binding at NMDA receptors—triple anxiolytic via three distinct molecular targets |European
 |===
 
-===== Women’s Health Synergies
+===== Women's Health Synergies
 
-[width="100%",cols="28%,14%,34%,24%",options="header",]
+[width="100%",cols="20%,10%,25%,25%,20%",options="header",]
 |===
-|Combination |Ratio |Synergic Effect |Traditions
-|*Cramp Bark {plus} Black Haw* |Equal parts |Dual uterine antispasmodics |Native American
-|*Fenugreek {plus} Blessed Thistle* |Equal parts |Enhanced galactagogue effect |Western herbalism
-|*Saw Palmetto {plus} Nettle Root* |Equal parts |Complementary prostate support (also applies to men’s health) |European
-|*Vitex {plus} Raspberry Leaf* |Vitex AM {plus} Raspberry throughout |Hormonal regulation {plus} uterine toning |European
-|*Dong Quai {plus} Astragalus {plus} Ginger* (Si Wu Tang base) |Per formula |Blood building with warming support |TCM
+|Combination |Ratio |Synergic Effect |Mechanism |Traditions
+|*Cramp Bark {plus} Black Haw* |Equal parts |Dual uterine antispasmodics |Scopoletin and viopudial (cramp bark) relax uterine smooth muscle via calcium channel blockade; salicin derivatives and aesculetin (black haw) provide additional spasmolytic and mild analgesic effects through prostaglandin modulation |Native American
+|*Fenugreek {plus} Blessed Thistle* |Equal parts |Enhanced galactagogue effect |Diosgenin (fenugreek) may support prolactin signaling through steroidal saponin pathways; cnicin (blessed thistle) is a sesquiterpene lactone bitter that stimulates digestive and lactation reflexes via vagal nerve activation |Western herbalism
+|*Saw Palmetto {plus} Nettle Root* |Equal parts |Complementary prostate support (also applies to men's health) |Liposterolic extract (saw palmetto) inhibits 5-alpha-reductase types I and II, reducing DHT conversion; lectins and lignans (nettle root) inhibit SHBG binding to prostate cell membranes and suppress aromatase activity |European
+|*Vitex {plus} Raspberry Leaf* |Vitex AM {plus} Raspberry throughout |Hormonal regulation {plus} uterine toning |Diterpenes (vitex) act as dopamine D2 receptor agonists in the pituitary, reducing prolactin and normalizing progesterone; fragarine (raspberry leaf) is a uterine tonic alkaloid that regulates myometrial smooth muscle tone |European
+|*Dong Quai {plus} Astragalus {plus} Ginger* (Si Wu Tang base) |Per formula |Blood building with warming support |Ferulic acid and ligustilide (dong quai) are vasodilatory and inhibit platelet aggregation; astragaloside IV supports hematopoiesis via erythropoietin signaling; gingerols enhance peripheral circulation as a warming synergist |TCM
 |===
 
 ===== Urinary Synergies
 
-[width="100%",cols="28%,14%,34%,24%",options="header",]
+[width="100%",cols="20%,10%,25%,25%,20%",options="header",]
 |===
-|Combination |Ratio |Synergic Effect |Traditions
-|*Cranberry {plus} Goldenrod* |Cranberry juice {plus} Goldenrod tea |Anti-adhesion {plus} flushing for UTI prevention |Western herbalism
-|*Dandelion Leaf {plus} Nettle Leaf* |Equal parts |Potassium-sparing diuretic with nutritive minerals |European
-|*Saw Palmetto {plus} Nettle Root {plus} Pygeum* |Per product guidance |Triple prostate formula (synergistic BPH relief) |European phytotherapy
+|Combination |Ratio |Synergic Effect |Mechanism |Traditions
+|*Cranberry {plus} Goldenrod* |Cranberry juice {plus} Goldenrod tea |Anti-adhesion {plus} flushing for UTI prevention |A-type proanthocyanidins (cranberry) block P-fimbriae adhesion of E. coli to uroepithelial cells; saponins and flavonoids (goldenrod) are aquaretic—increase urine volume without electrolyte depletion—flushing bacteria mechanically |Western herbalism
+|*Dandelion Leaf {plus} Nettle Leaf* |Equal parts |Potassium-sparing diuretic with nutritive minerals |Sesquiterpene lactones and potassium salts (dandelion) promote diuresis while replacing lost potassium; nettle flavonoid glycosides contribute additional osmotic diuresis with high mineral content (calcium, magnesium, iron) |European
+|*Saw Palmetto {plus} Nettle Root {plus} Pygeum* |Per product guidance |Triple prostate formula (synergistic BPH relief) |5-alpha-reductase inhibition (saw palmetto liposterols); SHBG binding displacement and aromatase inhibition (nettle root lignans); beta-sitosterol and pentacyclic triterpenes (pygeum) reduce prostatic inflammation via 5-LOX and PGE2 inhibition |European phytotherapy
 |===
 
 '''''
