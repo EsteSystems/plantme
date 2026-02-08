@@ -12309,6 +12309,102 @@ Alphabetical index of 128 medicinal plants. Each entry includes: scientific name
 
 '''''
 
+=== Active Compounds Reference
+
+The following table maps each medicinal plant to its key pharmacologically active compounds, based on modern phytochemical analysis.
+
+[width="100%",cols="30%,70%",options="header",]
+|===
+|Plant |Key Active Compounds
+|Ginger |Gingerol, volatile oils
+|Cardamom |Cineole, volatile oils
+|Clove |Eugenol, volatile oils
+|Fennel |Anethole, volatile oils
+|Cumin |Volatile oils
+|Coriander |Linalool, volatile oils
+|Gentian |Alkaloids
+|Psyllium |Mucilage
+|Senna |Alkaloids
+|Castor Oil |Ricin
+|Aloe Vera |Mucilage
+|Caraway |Volatile oils, anethole
+|Asafoetida |Volatile oils
+|Chicory |Inulin, flavonoids
+|Wormwood |Volatile oils, alkaloids
+|Garlic |Allicin, volatile oils
+|Papaya |Alkaloids
+|Mullein |Mucilage, saponins
+|Ivy Leaf |Saponins
+|Onion |Quercetin, flavonoids
+|Sage |Rosmarinic acid, volatile oils, thymol
+|Horseradish |Volatile oils
+|Lobelia |Alkaloids
+|Khella |Flavonoids
+|Ginkgo |Ginkgolides, bilobalide, flavonoids
+|Lavender |Linalool, volatile oils
+|Stinging Nettle |Flavonoids, quercetin
+|Arnica |Flavonoids
+|Cramp Bark |Tannins
+|Valerian |Valerenic acid, volatile oils
+|Myrrh |Volatile oils, tannins
+|Cat's Claw |Alkaloids, tannins
+|Elder Flower |Flavonoids, quercetin
+|Yarrow |Volatile oils, flavonoids, tannins
+|Linden/Lime Flower |Flavonoids, mucilage, volatile oils
+|Sweet Wormwood |Volatile oils
+|Neem |Alkaloids
+|Chiretta |Alkaloids
+|Echinacea |Alkaloids, flavonoids
+|Andrographis |Alkaloids
+|Lemon Balm |Rosmarinic acid, volatile oils, flavonoids
+|Astragalus |Saponins, flavonoids
+|Tea Tree Oil |Volatile oils, cineole
+|Plantain |Aucubin, mucilage, tannins
+|Calendula |Flavonoids
+|Oatmeal |Saponins, flavonoids
+|Chickweed |Saponins, flavonoids
+|Hibiscus |Anthocyanins, flavonoids
+|Rosemary |Rosmarinic acid, cineole, volatile oils
+|Prickly Ash |Alkaloids
+|Horse Chestnut |Saponins, flavonoids
+|Butcher's Broom |Saponins
+|Gotu Kola |Saponins, flavonoids
+|Shepherd's Purse |Flavonoids, tannins
+|Yellow Dock |Tannins
+|Dong Quai |Volatile oils
+|Passionflower |Flavonoids, alkaloids
+|Kava |Kavalactones
+|Hops |Volatile oils, flavonoids
+|Rhodiola |Saponins, flavonoids
+|Holy Basil / Tulsi |Eugenol, rosmarinic acid, volatile oils
+|Eleuthero |Saponins
+|Schisandra |Volatile oils
+|Saffron |Volatile oils
+|Bacopa |Saponins, alkaloids
+|Lion's Mane |Beta-glucans
+|Skullcap |Flavonoids, baicalin
+|Goldenrod |Flavonoids, saponins, tannins
+|Chanca Piedra |Flavonoids, tannins, alkaloids
+|Dandelion |Inulin, flavonoids
+|Parsley |Flavonoids, volatile oils, apigenin
+|Corn Silk |Flavonoids, tannins
+|Saw Palmetto |Flavonoids
+|Raspberry Leaf |Tannins, flavonoids, ellagic acid
+|Chaste Tree / Vitex |Flavonoids, volatile oils
+|Mugwort |Volatile oils
+|Cinnamon |Cinnamaldehyde, volatile oils, tannins
+|Black Cohosh |Saponins, tannins
+|Red Clover |Flavonoids
+|Fenugreek |Saponins, alkaloids, flavonoids
+|Blessed Thistle |Tannins, flavonoids
+|Ginseng |Saponins
+|American Ginseng |Saponins
+|Eyebright |Tannins, flavonoids, aucubin
+|Miswak / Siwak |Volatile oils, flavonoids
+|Cayenne |Capsaicin
+|Butterbur |Petasin
+|===
+
 === Plant Compatibility Guidelines
 
 ==== Synergistic Combinations (Documented Across Traditions)

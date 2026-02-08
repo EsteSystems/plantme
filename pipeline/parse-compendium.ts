@@ -555,6 +555,7 @@ class CompendiumParser {
     this.parseSections();
     this.parseAppendixF();
     this.parseSynergyTables();
+    this.parseCompoundReference();
     console.log(`  Plants:       ${this.plants.size}`);
     console.log(`  Conditions:   ${this.conditions.size}`);
     console.log(`  Body Systems: ${this.bodySystems.size}`);
@@ -1105,6 +1106,66 @@ class CompendiumParser {
     // Split on + or "and"
     const parts = cleaned.split(/\s*\+\s*|\s+and\s+/i).map((s) => s.trim()).filter(Boolean);
     return parts;
+  }
+
+  // ── Parse Active Compounds Reference table ─────────────────────────────────
+
+  private parseCompoundReference() {
+    const startIdx = this.lines.findIndex((l) => l.includes("Active Compounds Reference"));
+    if (startIdx === -1) {
+      console.warn("  Warning: Active Compounds Reference not found");
+      return;
+    }
+
+    const endIdx = this.lines.findIndex(
+      (l, idx) => idx > startIdx && l.startsWith("=== ") && !l.includes("Active Compounds")
+    );
+    const end = endIdx === -1 ? this.lines.length : endIdx;
+
+    let inTable = false;
+    let isHeaderRow = false;
+    let linked = 0;
+
+    for (let i = startIdx; i < end; i++) {
+      const line = this.lines[i].trim();
+
+      if (line === "|===") {
+        inTable = !inTable;
+        isHeaderRow = inTable;
+        continue;
+      }
+
+      if (inTable && line.startsWith("|") && !isHeaderRow) {
+        const cells = line.split("|").filter(Boolean).map((c) => cleanAsciiDoc(c.trim()));
+        if (cells.length >= 2) {
+          const plantName = cells[0].trim();
+          const compounds = cells[1].split(",").map((c) => c.trim()).filter(Boolean);
+
+          const plant = this.findPlantByName(plantName);
+          if (plant) {
+            for (const compound of compounds) {
+              // Match against SUBSTANCE_PATTERNS to use canonical name
+              const match = SUBSTANCE_PATTERNS.find((sp) =>
+                sp.patterns.some((p) => p.test(compound))
+              );
+              const subName = match ? match.name : compound;
+              const sub = this.getOrCreateSubstance(subName);
+              const key = `${plant.id}-${sub.id}`;
+              if (!this.plantSubstances.has(key)) {
+                this.plantSubstances.add(key);
+                linked++;
+              }
+            }
+          }
+        }
+      }
+
+      if (isHeaderRow && line.startsWith("|")) {
+        isHeaderRow = false;
+      }
+    }
+
+    console.log(`  Compound ref links: ${linked}`);
   }
 
   // ── Build output ──────────────────────────────────────────────────────────
