@@ -3,6 +3,16 @@ export interface Env {
   DB: D1Database;
 }
 
+/** Reference to a scientific paper */
+export interface Reference {
+  id: number;
+  authors: string;
+  title: string;
+  journal: string;
+  year: number;
+  url: string;
+}
+
 /** Database row types */
 export interface PlantRow {
   id: number;
@@ -52,6 +62,7 @@ export interface SubstanceRow {
   slug: string;
   name: string;
   description: string | null;
+  refs: string | null; // JSON string of Reference[]
 }
 
 export interface CautionRow {
@@ -68,6 +79,7 @@ export interface SynergyRow {
   mechanism: string | null;
   effect: string | null;
   tradition: string | null;
+  refs: string | null; // JSON string of Reference[]
 }
 
 export interface SearchResult {
@@ -83,9 +95,9 @@ export interface PlantDetail extends Omit<PlantRow, "alt_names"> {
   conditions: { slug: string; name: string; system: string; dosage: string | null }[];
   traditions: { slug: string; name: string }[];
   preparations: { slug: string; name: string; instructions: string | null }[];
-  substances: { slug: string; name: string }[];
-  cautions: { slug: string; name: string; severity: string; detail: string | null }[];
-  synergies: { slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null }[];
+  substances: { slug: string; name: string; refs: Reference[] | null }[];
+  cautions: { slug: string; name: string; severity: string; detail: string | null; refs: Reference[] | null }[];
+  synergies: { slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null; refs: Reference[] | null }[];
 }
 
 export interface GraphData {

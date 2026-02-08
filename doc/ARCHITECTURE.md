@@ -76,46 +76,31 @@ The compendium is inherently a **graph**, not a table. The core entities and the
 │  ┌──────────────────────┐     ┌──────────────────────────────────┐   │
 │  │  Cloudflare Pages    │     │      Cloudflare Worker (API)     │   │
 │  │                      │     │                                  │   │
-│  │  - Static SPA        │────►│  /api/search?q=...&type=...      │   │
+│  │  - Static SPA        │     │  /api/search?q=...&type=...      │   │
 │  │  - Search UI         │     │  /api/plants/:slug               │   │
 │  │  - Graph Explorer    │     │  /api/conditions/:slug           │   │
 │  │  - Plant Detail View │     │  /api/graph/synergies            │   │
-│  │                      │     │  /api/graph/plant/:slug          │   │
-│  │  (Vite + Vanilla TS  │     │  /api/traditions/:slug           │   │
-│  │   or Astro)          │     │  /api/substances/:slug           │   │
-│  └──────────────────────┘     │                                  │   │
-│                               │  Runtime: Hono on Workers        │   │
-│                               └──────────┬───────────────────────┘   │
+│  │  - Illustrations     │     │  /api/graph/plant/:slug          │   │
+│  │                      │     │  /api/traditions/:slug           │   │
+│  │  (Vite + Vanilla TS) │     │  /api/substances/:slug           │   │
+│  │                      │     │                                  │   │
+│  │  ┌────────────────┐  │     │  Runtime: Hono on Workers        │   │
+│  │  │ Pages Functions│──┼────►│                                  │   │
+│  │  │ /api/* proxy   │  │     │                                  │   │
+│  │  └────────────────┘  │     └──────────┬───────────────────────┘   │
+│  └──────────────────────┘                │                            │
 │                                          │                            │
-│                    ┌─────────────────────┼─────────────────────┐      │
-│                    │                     │                     │      │
-│                    ▼                     ▼                     ▼      │
-│           ┌──────────────┐    ┌──────────────┐    ┌──────────────┐   │
-│           │ Cloudflare   │    │ Cloudflare   │    │ Cloudflare   │   │
-│           │ D1 (SQLite)  │    │ KV           │    │ R2           │   │
-│           │              │    │              │    │              │   │
-│           │ Structured   │    │ Search index │    │ Images,      │   │
-│           │ plant data,  │    │ cache, config│    │ illustrations│   │
-│           │ relations,   │    │              │    │ (future)     │   │
-│           │ full-text    │    │              │    │              │   │
-│           └──────────────┘    └──────────────┘    └──────────────┘   │
-│                                                                       │
-└────────────────────────────────────────────────────────────────────────┘
-
-┌────────────────────────────────────────────────────────────────────────┐
-│                        Development / CI                                │
-│                                                                       │
-│  ┌──────────────────────┐     ┌──────────────────────────────────┐   │
-│  │  GitHub Repository   │     │  GitHub Actions                  │   │
-│  │                      │────►│                                  │   │
-│  │  /doc/               │     │  1. Parse compendium → JSON      │   │
-│  │    *.adoc (source)   │     │  2. Validate schema              │   │
-│  │  /data/              │     │  3. Seed D1 database             │   │
-│  │    schema.sql        │     │  4. Deploy Worker (wrangler)     │   │
-│  │    seed.json         │     │  5. Deploy Pages                 │   │
-│  │  /worker/            │     │                                  │   │
-│  │  /web/               │     └──────────────────────────────────┘   │
-│  └──────────────────────┘                                            │
+│                                          ▼                            │
+│                                 ┌──────────────┐                     │
+│                                 │ Cloudflare   │                     │
+│                                 │ D1 (SQLite)  │                     │
+│                                 │              │                     │
+│                                 │ Structured   │                     │
+│                                 │ plant data,  │                     │
+│                                 │ relations,   │                     │
+│                                 │ full-text,   │                     │
+│                                 │ references   │                     │
+│                                 └──────────────┘                     │
 │                                                                       │
 └────────────────────────────────────────────────────────────────────────┘
 ```
@@ -148,7 +133,7 @@ natures-pharmacy-compendium.adoc
 - Generate slugs for URL-friendly identifiers
 - Produce `seed.json` conforming to a strict JSON Schema
 
-**Technology:** Node.js script using a Markdown/AsciiDoc AST parser (e.g., `asciidoctor.js`). Runs in CI or locally.
+**Technology:** TypeScript script using `asciidoctor.js` for AsciiDoc parsing. Includes biochemistry descriptions and scientific paper references (PubMed/DOI) for substances, synergies, and cautions. Runs locally.
 
 ### 2. Database Schema (Cloudflare D1)
 
@@ -203,7 +188,8 @@ CREATE TABLE substances (
     id          INTEGER PRIMARY KEY,
     slug        TEXT UNIQUE NOT NULL,
     name        TEXT NOT NULL,
-    description TEXT
+    description TEXT,
+    refs        TEXT            -- JSON array of Reference objects
 );
 
 CREATE TABLE cautions (
@@ -211,7 +197,8 @@ CREATE TABLE cautions (
     slug        TEXT UNIQUE NOT NULL,
     name        TEXT NOT NULL,
     severity    TEXT CHECK(severity IN ('info', 'warning', 'danger')),
-    detail      TEXT
+    detail      TEXT,
+    refs        TEXT            -- JSON array of Reference objects
 );
 
 -- Relationships (edges)
@@ -257,6 +244,7 @@ CREATE TABLE synergies (
     mechanism   TEXT,
     effect      TEXT,
     tradition   TEXT,
+    refs        TEXT,           -- JSON array of Reference objects
     CHECK (plant_a_id < plant_b_id),
     PRIMARY KEY (plant_a_id, plant_b_id)
 );
@@ -286,10 +274,12 @@ worker/
 │   │   ├── conditions.ts # GET /api/conditions, /api/conditions/:slug
 │   │   ├── graph.ts      # GET /api/graph/synergies, /api/graph/plant/:slug
 │   │   ├── traditions.ts # GET /api/traditions/:slug
-│   │   └── substances.ts # GET /api/substances/:slug
+│   │   ├── substances.ts # GET /api/substances/:slug
+│   │   └── systems.ts    # GET /api/systems
 │   ├── db/
 │   │   └── queries.ts    # Prepared D1 queries
 │   └── types.ts          # Shared TypeScript types
+├── schema.sql
 ├── wrangler.toml
 ├── package.json
 └── tsconfig.json
@@ -346,29 +336,37 @@ web/
 │   ├── index.html
 │   ├── main.ts
 │   ├── style.css
+│   ├── favicon.svg
 │   ├── pages/
-│   │   ├── search.ts       # Search bar + results
-│   │   ├── plant-detail.ts # Single plant view
-│   │   ├── condition.ts    # Condition → plant list
-│   │   ├── explorer.ts     # Network graph explorer
-│   │   └── tradition.ts    # Tradition overview
+│   │   ├── search.ts        # Search bar + results
+│   │   ├── plant-detail.ts  # Single plant view with citations
+│   │   ├── condition.ts     # Condition → plant list
+│   │   ├── explorer.ts      # Network graph explorer (D3)
+│   │   ├── substance.ts     # Substance detail with refs
+│   │   └── traditions.ts    # Tradition overview + detail
 │   ├── components/
 │   │   ├── search-bar.ts
 │   │   ├── plant-card.ts
-│   │   ├── graph.ts        # D3 force-directed graph
-│   │   ├── filters.ts      # Faceted filter sidebar
-│   │   └── nav.ts
+│   │   ├── graph.ts         # D3 force-directed graph
+│   │   └── tag-list.ts      # Reusable tag/chip list
 │   └── lib/
-│       ├── api.ts          # Fetch wrapper for Worker API
-│       └── graph-utils.ts  # Graph data transforms
+│       ├── api.ts           # Fetch wrapper for Worker API
+│       ├── citations.ts     # Inline [N] citation rendering (DOM API)
+│       ├── illustrations.ts # Kohler plant illustration mapping
+│       ├── router.ts        # Client-side SPA router
+│       └── types.ts         # Frontend type definitions
+├── functions/
+│   └── api/
+│       └── [[path]].ts      # Pages Functions: proxies /api/* to Worker
 ├── public/
-│   └── favicon.svg
+│   ├── _redirects
+│   └── illustrations/       # 58 Kohler botanical JPGs
 ├── vite.config.ts
 ├── package.json
 └── tsconfig.json
 ```
 
-**Stack:** Vite + TypeScript + vanilla DOM (or Lit for lightweight components). No heavy framework needed for this scale.
+**Stack:** Vite + TypeScript + vanilla DOM + D3.js for graph visualization. No framework needed for this scale.
 
 ### 5. Network Visualization
 
@@ -437,12 +435,16 @@ interface GraphData {
 PlantMe/
 ├── doc/
 │   ├── ARCHITECTURE.md                         # This file
+│   ├── development-plan.md                     # Development roadmap
 │   └── natures-pharmacy-compendium.adoc        # Source compendium
 ├── pipeline/
 │   ├── parse-compendium.ts                     # AsciiDoc → seed.json
 │   ├── validate.ts                             # JSON Schema validation
-│   ├── seed-d1.ts                              # Load seed.json → D1
-│   └── schema.json                             # Entity/relation JSON Schema
+│   ├── seed-d1.ts                              # seed.json → seed.sql
+│   ├── schema.json                             # Entity/relation JSON Schema
+│   ├── koehler-illustrations.json              # Illustration URL mapping
+│   ├── seed.json                               # Generated structured data
+│   └── seed.sql                                # Generated SQL seed file
 ├── worker/
 │   ├── src/
 │   │   ├── index.ts
@@ -461,14 +463,13 @@ PlantMe/
 │   │   ├── pages/
 │   │   ├── components/
 │   │   └── lib/
+│   ├── functions/                              # Cloudflare Pages Functions
+│   │   └── api/[[path]].ts                     # API proxy to Worker
 │   ├── public/
+│   │   └── illustrations/                      # 58 Kohler botanical JPGs
 │   ├── vite.config.ts
 │   ├── package.json
 │   └── tsconfig.json
-├── .github/
-│   └── workflows/
-│       ├── deploy.yml                          # CI: parse → seed → deploy
-│       └── validate.yml                        # PR check: parse + schema validation
 ├── package.json                                # Workspace root (npm workspaces)
 ├── .gitignore
 └── README.md
@@ -476,63 +477,29 @@ PlantMe/
 
 ---
 
-## Deployment Pipeline
+## Deployment
 
+Deployment is currently manual via Wrangler CLI:
+
+```bash
+# 1. Parse compendium and generate seed data
+npm run parse && npm run validate && npm run seed
+
+# 2. Deploy Worker API
+npm run deploy:worker
+
+# 3. Seed remote D1 database
+cd worker
+npx wrangler d1 execute DB --remote --file=schema.sql
+npx wrangler d1 execute DB --remote --file=../pipeline/seed.sql
+cd ..
+
+# 4. Build and deploy frontend (with Pages Functions API proxy)
+npm run build:web
+cd web && npx wrangler pages deploy dist --project-name=plantme
 ```
-  ┌──────────┐     ┌──────────────┐     ┌─────────────┐     ┌────────────┐
-  │  git push │────►│ GitHub       │────►│ Parse &     │────►│ Deploy     │
-  │  to main  │     │ Actions      │     │ Validate    │     │            │
-  └──────────┘     └──────────────┘     │ Compendium  │     │ wrangler   │
-                                         └──────┬──────┘     │ d1 seed    │
-                                                │            │ wrangler   │
-                                                ▼            │ pages      │
-                                         ┌─────────────┐    │ deploy     │
-                                         │ seed.json   │───►│            │
-                                         └─────────────┘    └────────────┘
-```
 
-### CI Steps (`deploy.yml`)
-
-```yaml
-name: Deploy PlantMe
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Parse compendium
-        run: npm run -w pipeline parse
-
-      - name: Validate data
-        run: npm run -w pipeline validate
-
-      - name: Deploy Worker & seed D1
-        run: |
-          npx wrangler d1 execute plantme-db --file=worker/schema.sql
-          npm run -w pipeline seed
-          npx wrangler deploy -c worker/wrangler.toml
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-
-      - name: Build & deploy frontend
-        run: |
-          npm run -w web build
-          npx wrangler pages deploy web/dist --project-name=plantme
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-```
+**Note:** Remote D1 does not support `BEGIN TRANSACTION`/`COMMIT` — the seed-d1.ts script strips these automatically. When re-seeding, drop existing tables first with `PRAGMA foreign_keys = OFF` to avoid constraint errors.
 
 ---
 
@@ -546,16 +513,7 @@ compatibility_date = "2025-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "plantme-db"
-database_id = "<will-be-generated>"
-
-[[kv_namespaces]]
-binding = "CACHE"
-id = "<will-be-generated>"
-
-# Optional: R2 for images
-# [[r2_buckets]]
-# binding = "IMAGES"
-# bucket_name = "plantme-images"
+database_id = "f7b4e815-e542-4043-80c8-ba96c1b4f74d"
 ```
 
 ---
@@ -574,11 +532,22 @@ id = "<will-be-generated>"
 
 ---
 
+## What's Implemented
+
+- Full-text search across plants, conditions, substances, and traditions (D1 FTS5)
+- Plant detail pages with conditions, preparations, synergies, cautions, and illustrations
+- Scientific paper references with inline `[N]` citations linking to PubMed/DOI
+- Substance and condition detail pages
+- Tradition browsing and filtering
+- D3 force-directed synergy graph explorer with tradition/system filters
+- 58 Kohler botanical illustrations with Wikimedia fallback
+- Pages Functions API proxy (no CORS issues in production)
+
 ## Future Considerations
 
+- **CI/CD pipeline:** GitHub Actions for automated parse → seed → deploy on push to main
 - **Multilingual support:** The compendium references Arabic, Sanskrit, Chinese names. Could expand to full i18n.
 - **User contributions:** Allow practitioners to submit additions via GitHub PRs (content stays in `.adoc`).
-- **Plant images:** R2 bucket for botanical illustrations, linked from plant entries.
 - **Dosage calculator:** Interactive tool using Appendix D logic (age, weight, constitution adjustments).
 - **Seasonal calendar:** "What to harvest this month" based on Appendix B data and user's location.
 - **Offline PWA:** Cache the entire dataset locally for field use (the full DB is small enough).

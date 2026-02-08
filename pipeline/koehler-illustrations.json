@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Köhler's Medizinal-Pflanzen Illustration Mapping",
+  "description": "Maps medicinal plant scientific names to public-domain illustrations from Köhler's Medizinal-Pflanzen on Wikimedia Commons",
+  "type": "object",
+  "illustrations": {
+    "Curcuma longa": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Curcuma_longa_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-199.jpg/400px-Curcuma_longa_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-199.jpg",
+    "Lavandula angustifolia": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Lavandula_angustifolia_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-087.jpg/400px-Lavandula_angustifolia_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-087.jpg",
+    "Matricaria chamomilla": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Matricaria_chamomilla_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-061.jpg/400px-Matricaria_chamomilla_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-061.jpg",
+    "Mentha piperita": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Mentha_%C3%97_piperita_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-095.jpg/400px-Mentha_%C3%97_piperita_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-095.jpg",
+    "Valeriana officinalis": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Valeriana_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-143.jpg/400px-Valeriana_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-143.jpg",
+    "Cannabis sativa": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Cannabis_sativa_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-026.jpg/400px-Cannabis_sativa_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-026.jpg",
+    "Foeniculum vulgare": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Foeniculum_vulgare_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-148.jpg/400px-Foeniculum_vulgare_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-148.jpg",
+    "Glycyrrhiza glabra": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Glycyrrhiza_glabra_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-207.jpg/400px-Glycyrrhiza_glabra_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-207.jpg",
+    "Rosmarinus officinalis": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Rosmarinus_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-258.jpg/400px-Rosmarinus_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-258.jpg",
+    "Taraxacum officinale": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Taraxacum_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-135.jpg/400px-Taraxacum_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-135.jpg",
+    "Salvia officinalis": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Salvia_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-126.jpg/400px-Salvia_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-126.jpg",
+    "Melissa officinalis": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Melissa_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-094.jpg/400px-Melissa_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-094.jpg",
+    "Thymus vulgaris": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Thymus_vulgaris_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-271.jpg/400px-Thymus_vulgaris_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-271.jpg"
+  },
+  "metadata": {
+    "source": "https://commons.wikimedia.org/wiki/Category:Köhlers_Medizinal-Pflanzen",
+    "publication": "Köhler's Medizinal-Pflanzen in naturgetreuen Abbildungen mit kurz erläuterndem Texte",
+    "publisher": "Franz Eugen Köhler, Gera-Untermhaus, Germany",
+    "year": 1887,
+    "editor": "Gustav Pabst",
+    "license": "Public Domain",
+    "indexes": {
+      "latin": "https://commons.wikimedia.org/wiki/Koehler_1887_alphabetical_latin",
+      "english": "https://commons.wikimedia.org/wiki/Alphabetical_name_index_of_Köhlers_Medizinal-Pflanzen_-_english",
+      "hamburg_archive": "https://www-archiv.fdm.uni-hamburg.de/b-online/koehler/koeh-lat.htm"
+    }
+  },
+  "needs_verification": [
+    "Zingiber officinale",
+    "Aloe vera",
+    "Hypericum perforatum"
+  ]
+}

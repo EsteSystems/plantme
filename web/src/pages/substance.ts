@@ -1,5 +1,6 @@
 import { getSubstance } from "../lib/api.js";
 import { createPlantCard } from "../components/plant-card.js";
+import { renderCitedText, createReferenceList } from "../lib/citations.js";
 
 export function renderSubstancePage(slug: string): () => void {
   const app = document.getElementById("app")!;
@@ -19,11 +20,15 @@ export function renderSubstancePage(slug: string): () => void {
       if (substance.description) {
         const desc = document.createElement("p");
         desc.className = "page-header__desc";
-        desc.textContent = substance.description;
+        desc.appendChild(renderCitedText(substance.description, substance.refs));
         header.appendChild(desc);
       }
 
       app.appendChild(header);
+
+      if (substance.refs && substance.refs.length > 0) {
+        app.appendChild(createReferenceList(substance.refs));
+      }
 
       if (substance.plants.length > 0) {
         const section = document.createElement("section");

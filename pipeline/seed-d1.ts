@@ -64,7 +64,7 @@ lines.push("");
 lines.push("-- Substances");
 for (const s of seed.substances) {
   lines.push(
-    `INSERT OR REPLACE INTO substances (id, slug, name, description) VALUES (${s.id}, ${esc(s.slug)}, ${esc(s.name)}, ${esc(s.description)});`
+    `INSERT OR REPLACE INTO substances (id, slug, name, description, refs) VALUES (${s.id}, ${esc(s.slug)}, ${esc(s.name)}, ${esc(s.description)}, ${esc(s.refs ? JSON.stringify(s.refs) : null)});`
   );
 }
 lines.push("");
@@ -73,7 +73,7 @@ lines.push("");
 lines.push("-- Cautions");
 for (const c of seed.cautions) {
   lines.push(
-    `INSERT OR REPLACE INTO cautions (id, slug, name, severity, detail) VALUES (${c.id}, ${esc(c.slug)}, ${esc(c.name)}, ${esc(c.severity)}, ${esc(c.detail)});`
+    `INSERT OR REPLACE INTO cautions (id, slug, name, severity, detail, refs) VALUES (${c.id}, ${esc(c.slug)}, ${esc(c.name)}, ${esc(c.severity)}, ${esc(c.detail)}, ${esc(c.refs ? JSON.stringify(c.refs) : null)});`
   );
 }
 lines.push("");
@@ -141,7 +141,7 @@ lines.push("");
 lines.push("-- Synergies");
 for (const s of seed.synergies) {
   lines.push(
-    `INSERT OR REPLACE INTO synergies (plant_a_id, plant_b_id, mechanism, effect, tradition) VALUES (${s.plant_a_id}, ${s.plant_b_id}, ${esc(s.mechanism)}, ${esc(s.effect)}, ${esc(s.tradition)});`
+    `INSERT OR REPLACE INTO synergies (plant_a_id, plant_b_id, mechanism, effect, tradition, refs) VALUES (${s.plant_a_id}, ${s.plant_b_id}, ${esc(s.mechanism)}, ${esc(s.effect)}, ${esc(s.tradition)}, ${esc(s.refs ? JSON.stringify(s.refs) : null)});`
   );
 }
 lines.push("");

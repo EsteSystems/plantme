@@ -1,5 +1,14 @@
 /** Frontend types — mirrors worker/src/types.ts for API responses */
 
+export interface Reference {
+  id: number;
+  authors: string;
+  title: string;
+  journal: string;
+  year: number;
+  url: string;
+}
+
 export interface SearchResult {
   entity_type: string;
   entity_slug: string;
@@ -23,9 +32,9 @@ export interface PlantDetail extends PlantSummary {
   conditions: { slug: string; name: string; system: string; dosage: string | null }[];
   traditions: { slug: string; name: string }[];
   preparations: { slug: string; name: string; instructions: string | null }[];
-  substances: { slug: string; name: string }[];
-  cautions: { slug: string; name: string; severity: string; detail: string | null }[];
-  synergies: { slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null }[];
+  substances: { slug: string; name: string; refs: Reference[] | null }[];
+  cautions: { slug: string; name: string; severity: string; detail: string | null; refs: Reference[] | null }[];
+  synergies: { slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null; refs: Reference[] | null }[];
 }
 
 export interface ConditionDetail {
@@ -81,6 +90,7 @@ export interface SubstanceDetail {
   slug: string;
   name: string;
   description: string | null;
+  refs: Reference[] | null;
   plants: {
     slug: string;
     name: string;

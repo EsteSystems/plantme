@@ -3,6 +3,7 @@ import type { PlantDetail } from "../lib/types.js";
 import { createPlantCard } from "../components/plant-card.js";
 import { createTagList } from "../components/tag-list.js";
 import { PLANT_ILLUSTRATIONS } from "../lib/illustrations.js";
+import { renderCitedText, createReferenceList } from "../lib/citations.js";
 
 export function renderPlantDetailPage(slug: string): () => void {
   const app = document.getElementById("app")!;
@@ -130,10 +131,14 @@ export function renderPlantDetailPage(slug: string): () => void {
           mechLabel.className = "synergy-card__mechanism-label";
           mechLabel.textContent = "Biochemistry: ";
           const mechText = document.createElement("span");
-          mechText.textContent = syn.mechanism;
+          mechText.appendChild(renderCitedText(syn.mechanism, syn.refs));
           mech.appendChild(mechLabel);
           mech.appendChild(mechText);
           card.appendChild(mech);
+
+          if (syn.refs && syn.refs.length > 0) {
+            card.appendChild(createReferenceList(syn.refs));
+          }
         }
 
         section.appendChild(card);
@@ -250,9 +255,12 @@ function createCautionsSection(
     li.className = `caution caution--${caution.severity}`;
 
     const text = document.createElement("span");
-    text.textContent = caution.detail
-      ? `${caution.name}: ${caution.detail}`
-      : caution.name;
+    if (caution.detail) {
+      text.appendChild(document.createTextNode(`${caution.name}: `));
+      text.appendChild(renderCitedText(caution.detail, caution.refs));
+    } else {
+      text.textContent = caution.name;
+    }
 
     li.appendChild(text);
     list.appendChild(li);

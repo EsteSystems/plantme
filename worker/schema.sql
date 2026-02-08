@@ -50,7 +50,8 @@ CREATE TABLE IF NOT EXISTS substances (
     id          INTEGER PRIMARY KEY,
     slug        TEXT UNIQUE NOT NULL,
     name        TEXT NOT NULL,
-    description TEXT
+    description TEXT,
+    refs        TEXT                    -- JSON array of Reference objects
 );
 
 CREATE TABLE IF NOT EXISTS cautions (
@@ -58,7 +59,8 @@ CREATE TABLE IF NOT EXISTS cautions (
     slug        TEXT UNIQUE NOT NULL,
     name        TEXT NOT NULL,
     severity    TEXT CHECK(severity IN ('info', 'warning', 'danger')),
-    detail      TEXT
+    detail      TEXT,
+    refs        TEXT                    -- JSON array of Reference objects
 );
 
 -- ── Relationships (edges) ────────────────────────────────────────────────────
@@ -105,6 +107,7 @@ CREATE TABLE IF NOT EXISTS synergies (
     mechanism   TEXT,
     effect      TEXT,
     tradition   TEXT,
+    refs        TEXT,                   -- JSON array of Reference objects
     CHECK (plant_a_id < plant_b_id),
     PRIMARY KEY (plant_a_id, plant_b_id)
 );

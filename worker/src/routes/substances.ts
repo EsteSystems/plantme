@@ -17,6 +17,7 @@ app.get("/:slug", async (c) => {
 
   return c.json({
     ...substance,
+    refs: substance.refs ? JSON.parse(substance.refs) : null,
     plants: plants.results || [],
   });
 });

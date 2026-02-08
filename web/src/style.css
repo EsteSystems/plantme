@@ -732,6 +732,58 @@ ul, ol {
   user-select: none;
 }
 
+/* ── Citations & References ──────────────────────────────────────────────── */
+
+.citation {
+  font-size: 0.7em;
+  line-height: 1;
+  vertical-align: super;
+}
+.citation__link {
+  color: var(--color-green);
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.citation__link:hover {
+  color: var(--color-green-dark);
+  text-decoration: underline;
+}
+
+.reference-list {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.reference-list__heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.reference-list__items {
+  list-style-position: inside;
+  padding-left: 0;
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+.reference-list__item {
+  margin-bottom: 0.25rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+.reference-list__link {
+  color: var(--color-green);
+  text-decoration: none;
+  font-size: 0.75rem;
+}
+.reference-list__link:hover {
+  text-decoration: underline;
+}
+
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {

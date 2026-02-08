@@ -50,9 +50,18 @@ app.get("/:slug", async (c) => {
     conditions: conditions.results || [],
     traditions: traditions.results || [],
     preparations: preparations.results || [],
-    substances: substances.results || [],
-    cautions: cautions.results || [],
-    synergies: synergies.results || [],
+    substances: (substances.results || []).map((s: any) => ({
+      ...s,
+      refs: s.refs ? JSON.parse(s.refs) : null,
+    })),
+    cautions: (cautions.results || []).map((c: any) => ({
+      ...c,
+      refs: c.refs ? JSON.parse(c.refs) : null,
+    })),
+    synergies: (synergies.results || []).map((s: any) => ({
+      ...s,
+      refs: s.refs ? JSON.parse(s.refs) : null,
+    })),
   };
 
   return c.json(detail);

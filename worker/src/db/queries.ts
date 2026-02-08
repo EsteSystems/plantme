@@ -83,31 +83,31 @@ export async function getPlantPreparations(db: D1Database, plantId: number) {
 
 export async function getPlantSubstances(db: D1Database, plantId: number) {
   return db.prepare(`
-    SELECT s.slug, s.name
+    SELECT s.slug, s.name, s.refs
     FROM plant_substances ps
     JOIN substances s ON ps.substance_id = s.id
     WHERE ps.plant_id = ?
     ORDER BY s.name
-  `).bind(plantId).all<{ slug: string; name: string }>();
+  `).bind(plantId).all<{ slug: string; name: string; refs: string | null }>();
 }
 
 export async function getPlantCautions(db: D1Database, plantId: number) {
   return db.prepare(`
-    SELECT ca.slug, ca.name, ca.severity, pca.detail
+    SELECT ca.slug, ca.name, ca.severity, COALESCE(pca.detail, ca.detail) as detail, ca.refs
     FROM plant_cautions pca
     JOIN cautions ca ON pca.caution_id = ca.id
     WHERE pca.plant_id = ?
     ORDER BY CASE ca.severity WHEN 'danger' THEN 0 WHEN 'warning' THEN 1 ELSE 2 END, ca.name
-  `).bind(plantId).all<{ slug: string; name: string; severity: string; detail: string | null }>();
+  `).bind(plantId).all<{ slug: string; name: string; severity: string; detail: string | null; refs: string | null }>();
 }
 
 export async function getPlantSynergies(db: D1Database, plantId: number) {
   return db.prepare(`
-    SELECT p.slug, p.name, p.scientific, s.effect, s.mechanism, s.tradition
+    SELECT p.slug, p.name, p.scientific, s.effect, s.mechanism, s.tradition, s.refs
     FROM synergies s
     JOIN plants p ON (CASE WHEN s.plant_a_id = ? THEN s.plant_b_id ELSE s.plant_a_id END) = p.id
     WHERE s.plant_a_id = ? OR s.plant_b_id = ?
-  `).bind(plantId, plantId, plantId).all<{ slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null }>();
+  `).bind(plantId, plantId, plantId).all<{ slug: string; name: string; scientific: string | null; effect: string | null; mechanism: string | null; tradition: string | null; refs: string | null }>();
 }
 
 // ── Conditions ───────────────────────────────────────────────────────────────
