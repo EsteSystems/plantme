@@ -375,6 +375,171 @@ const SUBSTANCE_PATTERNS: { name: string; patterns: RegExp[] }[] = [
   { name: "Baicalin", patterns: [/baicalin/i, /baicalein/i] },
 ];
 
+// Substance descriptions: chemistry, effects, and preparation transformations
+const SUBSTANCE_DESCRIPTIONS: Record<string, string> = {
+  "Gingerol":
+    "Phenolic ketone found in fresh ginger rhizome. Primary bioactive: 6-gingerol is a potent 5-HT3 receptor antagonist (anti-emetic) and COX-2 inhibitor. Drying converts gingerols to shogaols (2× more pungent, stronger anti-inflammatory) and zingerone (less pungent, retains anti-nausea activity). Boiling partially degrades gingerols but produces dehydrated gingerdiols with antioxidant activity. Alcohol tincture preserves gingerols effectively. Fermentation (as in ginger beer) reduces gingerol content significantly.",
+
+  "Allicin":
+    "Thiosulfinate compound produced when garlic cloves are crushed or chopped, via alliinase acting on alliin. Extremely unstable — half-life ~16 hours at 23°C. Potent broad-spectrum antimicrobial that disrupts bacterial membranes via thiol-disulfide exchange. Cooking rapidly destroys allicin; even 60 seconds of microwaving eliminates most activity. Drying preserves alliin (the precursor) but not allicin itself. Alcohol tincture of fresh garlic captures some allicin but it degrades to diallyl disulfide and ajoene (anti-thrombotic). Crushing and waiting 10 minutes before cooking maximizes allicin formation. Fermented black garlic contains S-allyl cysteine instead — a stable, bioavailable antioxidant with different pharmacology.",
+
+  "Eugenol":
+    "Phenylpropanoid found in clove buds, holy basil, and cinnamon leaf oil. Strong COX-2 inhibitor and local anaesthetic — numbs tissue on contact via sodium channel blockade. Also potent antimicrobial against both gram-positive and gram-negative bacteria. Heat-stable: survives boiling and decoction well. Alcohol extracts eugenol efficiently (>90% recovery in tincture). Drying concentrates eugenol as water evaporates. Oxidation converts eugenol to eugenol oxide and dieugenol, which are less bioactive. In clove oil, eugenol comprises 72–90% of volatile fraction.",
+
+  "Curcumin":
+    "Diarylheptanoid polyphenol responsible for turmeric's yellow color. Inhibits NF-κB, COX-2, and LOX — broad anti-inflammatory. Extremely poor oral bioavailability (<1%) due to rapid hepatic glucuronidation and intestinal metabolism. Piperine (black pepper) increases absorption ~2000% by inhibiting glucuronidation. Lipids enhance absorption via micellar solubilization. Boiling in water extracts only ~10% of curcumin; simmering in fat/oil extracts much more. Alcohol tincture is effective for extraction. Drying preserves curcumin well. Heat degrades curcumin above 180°C into vanillin, ferulic acid, and feruloylmethane — all mildly anti-inflammatory but less potent.",
+
+  "Menthol":
+    "Cyclic monoterpene alcohol from peppermint oil. Activates TRPM8 cold receptors producing cooling sensation. Antispasmodic on GI smooth muscle via calcium channel blockade — basis of enteric-coated peppermint oil capsules for IBS. Volatile: boiling drives off menthol rapidly (peppermint tea should be steeped covered, not boiled). Drying reduces menthol content by 20–40%. Alcohol tincture preserves menthol effectively. Topically acts as counterirritant and mild local anaesthetic. Metabolized hepatically to menthol glucuronide.",
+
+  "Salicin":
+    "Phenolic glucoside found in willow bark, meadowsweet, and poplar. Prodrug: converted by gut flora and liver to salicylic acid (the active metabolite, same as aspirin's mechanism). Inhibits COX-1 and COX-2 but with slower onset and longer duration than aspirin. Boiling/decoction extracts salicin effectively — traditional willow bark tea. Alcohol tincture also extracts well. Drying preserves salicin. Unlike aspirin, salicin does not acetylate platelets irreversibly, so anti-platelet effect is weaker. Meadowsweet's tannins buffer the gastric irritation that pure salicylates cause.",
+
+  "Berberine":
+    "Isoquinoline alkaloid found in goldenseal, Oregon grape, and barberry. Bright yellow color. Activates AMPK pathway — improves insulin sensitivity and glucose metabolism. Antimicrobial against bacteria, fungi, and protozoa. Poor oral bioavailability (~5%) due to P-glycoprotein efflux in gut. Heat-stable: survives decoction. Alcohol tincture extracts berberine efficiently (it is soluble in ethanol). Drying preserves berberine well. Synergistic with 5′-methoxyhydnocarpin (found in same plants), which inhibits bacterial efflux pumps.",
+
+  "Thymol":
+    "Monoterpene phenol found in thyme and oregano. Potent antimicrobial — disrupts bacterial cell membranes and inhibits biofilm formation. Also acts as bronchospasmolytic, relaxing airway smooth muscle. Moderately volatile: boiling drives off some thymol (cover tea while steeping). Drying reduces thymol content somewhat. Alcohol tincture extracts and preserves thymol very effectively. Used in commercial mouthwash (Listerine) at ~0.06%. Heating above 230°C decomposes thymol. Synergistic with carvacrol (its isomer) — together more antimicrobial than either alone.",
+
+  "Rosmarinic acid":
+    "Phenolic acid ester found in rosemary, lemon balm, sage, holy basil, and many Lamiaceae. Inhibits GABA-transaminase, increasing synaptic GABA levels (anxiolytic). Also inhibits complement activation (anti-inflammatory) and has strong antioxidant activity (ORAC value higher than vitamin E). Water-soluble: extracts well in tea/decoction. Heat-stable up to ~150°C. Alcohol tincture preserves it effectively. Drying preserves rosmarinic acid well — dried herbs retain most activity. Not significantly degraded by fermentation.",
+
+  "Volatile oils":
+    "Complex mixtures of terpenes, terpenoids, and phenylpropanoids responsible for plant aromas and many therapeutic effects. Composition varies enormously by species — may include monoterpenes (linalool, limonene), sesquiterpenes, or phenolics (eugenol, thymol). Generally antimicrobial, antispasmodic, and carminative. Highly sensitive to heat: boiling drives off most volatile compounds within minutes. Teas should be steeped covered, never boiled. Drying reduces volatile oil content 30–70% depending on method and temperature. Alcohol tincture is the best preservation method — ethanol dissolves and stabilizes most volatiles. Steam distillation isolates essential oils. Cold-pressed oils retain full volatile profile.",
+
+  "Tannins":
+    "Polyphenolic compounds that bind and precipitate proteins. Two major classes: hydrolyzable (gallotannins, ellagitannins) and condensed (proanthocyanidins). Astringent — tighten tissues, reduce secretions, protect mucous membranes. Antimicrobial by denaturing bacterial surface proteins. Water-soluble: extract well in hot water (longer steeping = more tannins). Boiling extracts maximum tannins. Drying concentrates tannins. Alcohol tincture extracts tannins efficiently. Excessive tannin intake can impair iron absorption by chelating dietary iron. Fermentation (as in tea processing) oxidizes catechins into theaflavins and thearubigins — different polyphenols with distinct activity.",
+
+  "Mucilage":
+    "High-molecular-weight polysaccharides that form viscous gel when hydrated. Found in marshmallow root, psyllium, aloe, mullein, plantain. Demulcent: coats and soothes irritated mucous membranes. Also prebiotic — fermented by gut flora into short-chain fatty acids. Extracted best in cold or lukewarm water (cold infusion overnight). Hot water works but excessive heat can denature polysaccharide structure. Alcohol destroys mucilage — tinctures are NOT appropriate for mucilage-rich herbs. Drying preserves mucilage precursors; rehydration restores gel-forming capacity. Boiling for extended periods can break down mucilage chains.",
+
+  "Alkaloids":
+    "Nitrogen-containing organic compounds with potent pharmacological activity. Diverse class including isoquinolines (berberine), tropanes (atropine), and pyrrolizidines (toxic). Generally bitter-tasting. Most are well-extracted by alcohol (alkaloids are bases, soluble in acidified ethanol). Water extraction (tea/decoction) is less efficient but still viable for many alkaloids. Heat-stable in general — survive boiling. Drying preserves alkaloid content well. Some alkaloids (e.g., pyrrolizidine) are hepatotoxic and concentrate with drying. Dose-dependent: many alkaloids are medicinal at low doses, toxic at high doses. Fermentation may alter alkaloid profiles.",
+
+  "Flavonoids":
+    "Large class of polyphenolic compounds (>6000 known). Subclasses include flavones (apigenin, luteolin), flavonols (quercetin, kaempferol), flavanones, isoflavones, and anthocyanins. Generally antioxidant, anti-inflammatory, and vasoprotective. Many modulate enzyme activity (COX, LOX, xanthine oxidase). Water-soluble glycosides extract in tea; aglycones extract better in alcohol. Heat-stable: survive boiling well. Drying preserves most flavonoids. Fermentation can cleave glycoside bonds, releasing free aglycones (generally more bioactive but less water-soluble). UV exposure can degrade some flavonoids — store dried herbs away from light.",
+
+  "Saponins":
+    "Triterpene or steroidal glycosides that foam when shaken in water (Latin sapo = soap). Found in ginseng (ginsenosides), astragalus (astragalosides), licorice, fenugreek, horse chestnut. Amphiphilic: interact with cell membranes, enhancing absorption of other compounds. Some are adaptogenic (ginsenosides), others are expectorant (by irritating bronchial mucosa reflexively). Well-extracted by boiling/decoction — traditional method for hard roots. Alcohol tincture also effective. Drying preserves saponins well. Hemolytic if injected IV but safe orally (poorly absorbed intact). Gut bacteria hydrolyze saponin glycosides into aglycones (sapogenins) with distinct pharmacology.",
+
+  "Glycyrrhizin":
+    "Triterpene saponin from licorice root, 50× sweeter than sucrose. Inhibits 11β-hydroxysteroid dehydrogenase type 2, increasing cortisol activity — anti-inflammatory but can cause pseudoaldosteronism (hypertension, hypokalemia) with chronic high-dose use. Also antiviral (inhibits viral penetration and replication). Well-extracted by boiling — traditional decoction herb. Alcohol tincture effective. Drying preserves glycyrrhizin. DGL (deglycyrrhizinated licorice) has glycyrrhizin removed to avoid mineralocorticoid side effects while retaining mucosal-protective flavonoids.",
+
+  "Silymarin":
+    "Flavonolignan complex from milk thistle seeds, comprising silybin (most active), silydianin, and silychristin. Potent hepatoprotective: stabilizes hepatocyte membranes, stimulates ribosomal RNA polymerase (promoting liver cell regeneration), and scavenges free radicals. Poorly water-soluble — tea extracts only ~10% of silymarin. Alcohol tincture extracts significantly more. Standardized extracts (70–80% silymarin) are most clinically effective. Drying preserves silymarin. Heat-stable up to ~160°C. Phosphatidylcholine complexes (phytosomes) dramatically improve oral bioavailability.",
+
+  "Withanolides":
+    "Steroidal lactones unique to ashwagandha (Withania somnifera). Withaferin A and withanolide D are most studied. Modulate HPA axis — normalize cortisol under chronic stress (adaptogenic). Also inhibit NF-κB (anti-inflammatory) and enhance GABAergic signaling (anxiolytic). Lipophilic: poorly extracted by water alone. Traditional Ayurvedic preparation simmers ashwagandha in milk (fat enhances extraction). Alcohol tincture extracts withanolides effectively. Drying preserves withanolides well — root is typically used dried and powdered. Heat-stable under normal cooking temperatures.",
+
+  "Boswellic acids":
+    "Pentacyclic triterpene acids from Boswellia serrata resin (frankincense). AKBA (acetyl-11-keto-β-boswellic acid) is the most potent — selectively inhibits 5-lipoxygenase, reducing leukotriene synthesis. Also inhibits topoisomerase and NF-κB. Lipophilic: poorly water-soluble. Alcohol tincture extracts boswellic acids moderately. Best administered as standardized extract or with lipid vehicles. Drying preserves boswellic acids (resin is naturally dry). Heat does not significantly degrade them. Traditional use burns resin as incense — inhalation delivers some volatile terpenes but not the non-volatile boswellic acids.",
+
+  "Harpagosides":
+    "Iridoid glycosides from devil's claw (Harpagophytum procumbens) tuber. Anti-inflammatory via COX-2 and TNF-α inhibition. Also analgesic — used for joint pain and back pain. Heat-sensitive: boiling degrades harpagosides significantly. Water extraction (cold or warm infusion) is traditional. Alcohol tincture preserves harpagosides well. Drying at low temperature preserves activity; high-temperature drying degrades them. Gastric acid can partially hydrolyze the glycoside bond, but harpagosides are absorbed intact in the duodenum. Standardized extracts typically contain 2–3% harpagosides.",
+
+  "Valerenic acid":
+    "Sesquiterpene acid found in valerian root. Positive allosteric modulator of GABA-A receptors — enhances GABA binding without acting as a direct agonist (unlike benzodiazepines). Anxiolytic and sedative without morning grogginess. Also inhibits GABA breakdown by inhibiting GABA-transaminase. Moderately volatile: some loss during boiling. Alcohol tincture is the preferred extraction method — ethanol extracts valerenic acid efficiently. Drying at room temperature preserves it; heat-drying above 40°C causes significant loss. Fresh root has more isovaleric acid (the distinctive odor) but dried root has more valerenic acid (concentration effect). Standardized extracts contain 0.8–1% valerenic acid.",
+
+  "Piperine":
+    "Alkaloid responsible for black pepper's pungency. Potent bioenhancer: inhibits hepatic and intestinal glucuronidation (UGT enzymes), CYP3A4, and P-glycoprotein efflux pumps — dramatically increasing bioavailability of co-administered compounds (curcumin +2000%, CoQ10 +30%). Also activates TRPV1 receptors (thermogenic). Heat-stable: survives cooking temperatures. Drying preserves piperine. Alcohol tincture extracts piperine effectively. Caution: piperine's enzyme inhibition can increase blood levels of pharmaceutical drugs (similar mechanism to grapefruit juice).",
+
+  "Capsaicin":
+    "Vanilloid compound responsible for chili pepper heat. Binds TRPV1 receptors on C-fiber nociceptors — initial activation causes burning pain, but prolonged exposure depletes substance P, producing analgesia (basis of capsaicin cream for neuropathic pain). Thermogenic: increases metabolic rate via sympathetic activation. Heat-stable: survives all cooking temperatures. Drying concentrates capsaicin — dried cayenne is more potent than fresh. Alcohol tincture extracts capsaicin efficiently (cayenne tincture). Not significantly water-soluble — oil or alcohol are better solvents. Scoville heat units measure capsaicin content. Dihydrocapsaicin (found alongside capsaicin) has similar but slightly less potent activity.",
+
+  "Catechins":
+    "Flavan-3-ol polyphenols, primarily from tea (Camellia sinensis). EGCG (epigallocatechin gallate) is most studied — antioxidant, anti-inflammatory, thermogenic, and anti-angiogenic. Green tea preserves catechins (unoxidized); black tea fermentation converts catechins to theaflavins and thearubigins (different activity profile). Hot water extraction at 70–80°C is optimal — boiling water degrades EGCG. Drying preserves catechins if done quickly. Alcohol tincture extracts catechins well. Adding lemon juice (vitamin C) stabilizes catechins in solution. Milk proteins bind catechins, reducing bioavailability.",
+
+  "Anthocyanins":
+    "Water-soluble vacuolar pigments (red, purple, blue) found in elderberry, bilberry, hibiscus, and many berries. Antioxidant and anti-inflammatory — inhibit NF-κB and COX-2. Also antiviral: elderberry anthocyanins inhibit viral neuraminidase. pH-dependent color: red in acid, blue in alkaline, colorless at neutral pH. Heat-sensitive: boiling degrades anthocyanins 20–50% depending on duration. Drying causes some loss but freeze-drying preserves well. Alcohol tincture preserves anthocyanins effectively (acidified ethanol is best). Fermentation (as in wine) preserves some anthocyanins but converts others to pyranoanthocyanins. Rapid oral absorption but short plasma half-life (~2 hours).",
+
+  "Proanthocyanidins":
+    "Oligomeric and polymeric flavan-3-ols (condensed tannins). Found in cranberry, grape seed, pine bark, hawthorn. Cranberry A-type PACs specifically prevent E. coli adhesion to uroepithelium (UTI prevention) — B-type PACs (grape, pine bark) do not share this activity. Strong antioxidant (ORAC values exceed vitamin C and E). Vasoprotective: strengthen capillary walls, reduce edema. Water-soluble: extract in tea. Heat-stable. Alcohol tincture extracts effectively. Drying preserves proanthocyanidins well. Polymerization increases with storage — very large polymers are poorly absorbed.",
+
+  "Inulin":
+    "Fructo-oligosaccharide (prebiotic fiber) found in chicory root, dandelion root, and elecampane. Not digested by human enzymes — fermented by Bifidobacterium and Lactobacillus in the colon, producing short-chain fatty acids (butyrate, propionate) that nourish colonocytes and reduce pH. Enhances calcium and magnesium absorption. Water-soluble: extracts well in hot water. Heat converts inulin to shorter-chain fructooligosaccharides (still prebiotic). Roasting (as in chicory coffee substitute) caramelizes inulin. Drying preserves inulin. Alcohol does not extract inulin efficiently. Excessive intake can cause flatulence and bloating.",
+
+  "Beta-glucans":
+    "Polysaccharides with β-glycosidic bonds, found in medicinal mushrooms (reishi, lion's mane, shiitake) and oats. β-1,3/1,6-glucans (fungal) activate innate immune system via Dectin-1 receptors on macrophages and dendritic cells — immunomodulatory, not immunostimulant. Oat β-1,3/1,4-glucans lower cholesterol by binding bile acids. Require hot water extraction (decoction) to break chitin cell walls of mushrooms. Alcohol alone does NOT extract beta-glucans. Dual extraction (hot water + alcohol) captures both beta-glucans and triterpenes. Drying preserves beta-glucans. Not degraded by normal cooking temperatures.",
+
+  "Allantoin":
+    "Diureide of glyoxylic acid found in comfrey (Symphytum). Promotes cell proliferation and wound healing by stimulating fibroblast activity and increasing extracellular matrix synthesis. Also moisturizing and keratolytic (softens skin). Water-soluble: extracts in tea or poultice. Heat-stable. Alcohol tincture extracts allantoin moderately. Drying preserves allantoin. Used topically for wound healing, burns, and ulcers. Note: comfrey also contains hepatotoxic pyrrolizidine alkaloids — topical use is preferred over internal use. Synthetic allantoin is widely used in commercial skincare.",
+
+  "Hypericin":
+    "Naphthodianthrone pigment from St. John's wort (Hypericum perforatum). Photosensitizer: absorbs UV light and generates reactive oxygen species — basis of both phototoxicity risk and potential photodynamic therapy applications. Antiviral activity against enveloped viruses. Contributes to antidepressant effect along with hyperforin. Water extraction (tea) yields some hypericin. Alcohol tincture extracts hypericin efficiently — standardized extracts typically contain 0.3% hypericin. Light-sensitive: degrades with UV exposure (store tinctures in dark bottles). Drying in shade preserves hypericin; sun-drying degrades it. Oil infusions (St. John's wort oil) turn red from hypericin extraction into lipids.",
+
+  "Hyperforin":
+    "Phloroglucinol derivative from St. John's wort. Primary antidepressant compound: inhibits reuptake of serotonin, norepinephrine, dopamine, GABA, and glutamate via TRPC6 channel activation — unique multi-transmitter mechanism. Also antibacterial (active against MRSA). Extremely unstable: oxidizes rapidly when exposed to light and air. Alcohol tincture must be made from fresh plant and stored in dark, airtight bottles. Drying causes significant hyperforin loss unless done rapidly in darkness. Not well-extracted by water. CO2 supercritical extraction is the gold standard for stable hyperforin. Standardized extracts aim for 3–5% hyperforin. Potent CYP3A4 inducer — causes drug interactions.",
+
+  "Ginkgolides":
+    "Diterpene trilactones unique to Ginkgo biloba. Ginkgolide B is the most pharmacologically active — potent and specific antagonist of platelet-activating factor (PAF), reducing platelet aggregation and improving microcirculation. Also neuroprotective via anti-inflammatory and antioxidant mechanisms. Heat-stable: survive decoction (traditional Chinese preparation). Alcohol tincture extracts ginkgolides efficiently. Standardized extract (EGb 761) contains 6% terpene trilactones (ginkgolides + bilobalide). Drying preserves ginkgolides well — leaves are typically dried before extraction. Not significantly degraded by fermentation.",
+
+  "Bilobalide":
+    "Sesquiterpene trilactone unique to Ginkgo biloba. Neuroprotective: preserves mitochondrial function during ischemia, inhibits glycine receptor-mediated neurotoxicity, and reduces cerebral edema. Works synergistically with ginkgolides for cognitive benefits. Similar extraction and stability profile to ginkgolides — heat-stable, well-extracted by alcohol, preserved by drying. Standardized ginkgo extracts typically contain ~3% bilobalide. Crosses the blood-brain barrier. More potent neuroprotectant than ginkgolides in animal stroke models.",
+
+  "Chamazulene":
+    "Sesquiterpene not present in fresh chamomile — formed during steam distillation from matricin (a sesquiterpene lactone) via heat-induced decomposition. Gives chamomile essential oil its characteristic blue color. Potent anti-inflammatory: inhibits leukotriene B4 synthesis and reduces histamine release. Present in steam-distilled oil but NOT in water infusions (tea) or alcohol tinctures — these contain matricin instead, which is also anti-inflammatory but less potent. Drying preserves matricin (the precursor). Topical application of chamomile oil delivers chamazulene directly. Degrades with prolonged light exposure.",
+
+  "Bisabolol":
+    "Monocyclic sesquiterpene alcohol found in chamomile essential oil. Anti-inflammatory (inhibits COX-2), wound-healing, and antimicrobial. Unlike chamazulene, bisabolol IS present in the fresh plant. Moderately volatile: some loss during boiling (steep covered). Alcohol tincture preserves bisabolol well. Drying causes moderate loss of bisabolol. Steam distillation recovers bisabolol efficiently. Used in commercial skincare for its anti-irritant properties. α-bisabolol is the naturally occurring enantiomer and is more active than synthetic racemic bisabolol.",
+
+  "Aucubin":
+    "Iridoid glycoside found in plantain (Plantago), eyebright, and mullein. Anti-inflammatory, hepatoprotective, and antimicrobial. Converted by gut bacteria to aucubigenin (the active aglycone), which is more potent. Water-soluble: extracts well in tea and decoctions. Heat partially stable — short boiling is fine, prolonged heating degrades it. Alcohol tincture extracts aucubin efficiently. Drying at low temperature preserves aucubin; high-heat drying causes degradation. Fresh plantain poultice delivers aucubin directly to wounds. Also has neuroprotective properties in animal models.",
+
+  "Arbutin":
+    "Hydroquinone glucoside found in uva-ursi (bearberry), cranberry, and pear. Prodrug: hydrolyzed by gut bacteria to hydroquinone, which is excreted in urine as an antimicrobial — active against E. coli and other urinary pathogens. Requires alkaline urine (pH >8) for optimal antibacterial activity — traditionally taken with sodium bicarbonate. Water-soluble: extracts well in tea. Heat-stable. Alcohol tincture also effective. Drying preserves arbutin well. Urine must be alkaline for hydroquinone to remain un-ionized and bactericidal. Short-term use recommended due to theoretical hydroquinone toxicity concerns with chronic use.",
+
+  "Ellagic acid":
+    "Phenolic compound found in raspberry, pomegranate, strawberry, and walnut. Potent antioxidant: scavenges free radicals and chelates metal ions. Anti-proliferative: induces apoptosis in abnormal cells via p53 activation. Gut bacteria convert ellagic acid to urolithins (A, B, C), which have distinct anti-inflammatory and anti-aging properties — urolithin production varies between individuals based on microbiome composition. Moderately water-soluble. Heat-stable: survives boiling and jam-making. Drying preserves ellagic acid. Alcohol tincture extracts it efficiently. Concentrated in seeds and peel rather than fruit flesh.",
+
+  "Cinnamaldehyde":
+    "Phenylpropanoid aldehyde responsible for cinnamon's flavor and aroma. Antimicrobial: disrupts bacterial quorum sensing and biofilm formation. Also improves insulin sensitivity via AMPK activation and GLUT4 translocation. Moderately volatile: some loss with boiling, but enough survives in cinnamon tea to be bioactive. Alcohol tincture extracts cinnamaldehyde very effectively. Drying preserves it well (cinnamon bark is used dried). Cassia cinnamon contains more cinnamaldehyde than Ceylon cinnamon but also more coumarin (hepatotoxic at high doses). Oxidation converts cinnamaldehyde to cinnamic acid (less bioactive). Oil of cinnamon is 65–80% cinnamaldehyde.",
+
+  "Anethole":
+    "Phenylpropanoid ether responsible for the sweet licorice-like flavor of fennel, anise, and star anise. Antispasmodic on GI smooth muscle via calcium channel modulation. Also estrogenic activity (structural similarity to catecholamines and dopamine). Carminative: reduces intestinal gas. Volatile: partially lost during boiling (fennel tea should be steeped covered). Alcohol tincture preserves anethole well. Drying causes moderate anethole loss. Trans-anethole is the naturally occurring, bioactive isomer; cis-anethole is toxic but rarely found naturally. Not significantly altered by fermentation. Fennel seed is 80–90% anethole by essential oil composition.",
+
+  "Parthenolide":
+    "Sesquiterpene lactone from feverfew (Tanacetum parthenium). Primary mechanism: inhibits NF-κB by alkylating cysteine residues, reducing production of pro-inflammatory cytokines (TNF-α, IL-1). Also inhibits platelet aggregation and serotonin release from platelets — basis of migraine prevention use. Unstable: degrades significantly during drying, especially with heat. Fresh plant or freeze-dried preparations are most potent. Alcohol tincture from fresh herb preserves parthenolide better than dried preparations. Boiling degrades parthenolide substantially. Standardized extracts aim for 0.2–0.4% parthenolide. Chewing fresh leaves is the traditional (though bitter) delivery method.",
+
+  "Petasin":
+    "Sesquiterpene ester from butterbur (Petasites hybridus). Antispasmodic: relaxes smooth muscle in bronchi and blood vessels. Used for migraine prevention and allergic rhinitis (comparable efficacy to cetirizine in clinical trials). Inhibits leukotriene synthesis and calcium channel influx. Raw butterbur contains hepatotoxic pyrrolizidine alkaloids (PAs) — only PA-free standardized extracts (like Petadolex) are safe. Boiling does NOT remove PAs. Alcohol tincture does not remove PAs. Only industrial CO2 extraction reliably removes PAs while preserving petasin. Drying does not affect petasin stability significantly.",
+
+  "Kavalactones":
+    "Lipophilic lactones from kava root (Piper methysticum), including kavain, dihydrokavain, methysticin, and yangonin. Anxiolytic: potentiate GABA-A receptors, block voltage-gated sodium channels, inhibit MAO-B, and modulate cannabinoid CB1 receptors — multi-target mechanism. Traditional preparation: cold water extraction of fresh root (knead root in water). Alcohol tincture extracts kavalactones efficiently but may extract hepatotoxic compounds not present in water extract. Boiling degrades some kavalactones. Drying preserves kavalactones well. Traditional fermentation is not typically applied to kava. Noble cultivars contain mainly kavain and dihydrokavain (desirable anxiolytics); tudei cultivars contain more dihydromethysticin (more sedating, potentially hepatotoxic).",
+
+  "Resveratrol":
+    "Stilbene polyphenol found in grape skin, Japanese knotweed, and peanuts. Activates SIRT1 (sirtuin) — implicated in longevity and metabolic health. Anti-inflammatory via NF-κB and COX-2 inhibition. Antioxidant and cardioprotective. Low oral bioavailability (~1%) due to rapid hepatic sulfation and glucuronidation. Red wine contains resveratrol (fermentation extracts it from grape skins), but amounts are modest. Alcohol tincture of Japanese knotweed is a concentrated source. Heat-stable under normal conditions. Drying preserves resveratrol. Trans-resveratrol is the bioactive form; UV light isomerizes it to less-active cis-resveratrol.",
+
+  "Oleuropein":
+    "Secoiridoid glycoside from olive leaf and fruit. Potent antioxidant: scavenges superoxide and hydroxyl radicals. Antihypertensive via ACE inhibition and calcium channel blockade. Also antimicrobial and antiviral. Bitter taste contributes to olive flavor (removed during olive curing). Water-soluble: extracts well in tea. Alcohol tincture also effective. Drying preserves oleuropein well. Hydrolyzed by gut bacteria and esterases to hydroxytyrosol (also potently antioxidant and cardioprotective). During olive oil processing, oleuropein is partially converted to oleacein. Fermentation (olive brining) degrades oleuropein — cured olives contain much less than fresh leaves.",
+
+  "Ephedrine":
+    "Phenethylamine alkaloid from Ephedra (Ma Huang). Sympathomimetic: stimulates release of norepinephrine from sympathetic neurons. Bronchodilator (β2-adrenergic activation), decongestant (α-adrenergic vasoconstriction), CNS stimulant, thermogenic. Heat-stable: traditional Chinese decoction method is effective. Alcohol tincture extracts ephedrine efficiently. Drying preserves ephedrine well — dried herb is the standard form. Pseudoephedrine (stereoisomer) has similar decongestant but less CNS stimulant activity. Cardiovascular risks: hypertension, arrhythmia, stroke at high doses. Regulated substance in many jurisdictions due to use as methamphetamine precursor.",
+
+  "Cineole":
+    "Bicyclic monoterpene ether (also called eucalyptol or 1,8-cineole). Found in eucalyptus, tea tree, cardamom, rosemary, and bay laurel. Mucolytic: thins respiratory mucus by reducing mucin production. Bronchodilatory via anti-inflammatory action (inhibits TNF-α, IL-1β). Also antimicrobial against respiratory pathogens. Volatile: significantly lost during boiling — steam inhalation captures cineole effectively. Alcohol tincture preserves cineole well. Drying causes 30–50% cineole loss. Absorbed through skin and lungs as well as GI tract. Hepatically metabolized to 2-hydroxycineole. Well-tolerated at normal doses; large doses of isolated eucalyptus oil can cause seizures.",
+
+  "Linalool":
+    "Monoterpene alcohol found in lavender, coriander, basil, and many aromatic plants. Anxiolytic: modulates glutamate binding at NMDA receptors (not via GABA). Also anti-inflammatory (inhibits LPS-induced NF-κB) and local anaesthetic. Readily absorbed via inhalation — basis of lavender aromatherapy for anxiety and sleep. Volatile: partially lost during boiling. Alcohol tincture preserves linalool well. Drying causes 20–40% linalool loss. S-(+)-linalool (lavender) and R-(-)-linalool (coriander) are enantiomers with similar but not identical pharmacology. Metabolized hepatically to linalool oxide. Used widely in perfumery and cosmetics.",
+
+  "Baicalin":
+    "Flavone glycoside found in skullcap (Scutellaria baicalensis and S. lateriflora). Anti-inflammatory: inhibits 12/15-lipoxygenase and COX-2. Also antiviral (inhibits viral replication), neuroprotective (reduces excitotoxicity), and anxiolytic (binds benzodiazepine site on GABA-A receptors). Hydrolyzed by gut bacteria to baicalein (aglycone), which crosses the blood-brain barrier more readily. Water-soluble: extracts well in decoction (traditional Chinese method). Alcohol tincture also effective. Drying preserves baicalin. Heat-stable. Chinese skullcap root contains much higher baicalin levels than American skullcap (which acts more via flavonoids and diterpenes).",
+
+  "Quercetin":
+    "Flavonol found widely in onions, elderflower, stinging nettle, hawthorn, and many fruits and vegetables. Potent antioxidant and anti-inflammatory: inhibits COX-2, LOX, and NF-κB. Mast cell stabilizer — inhibits histamine release (anti-allergic). Also inhibits xanthine oxidase (anti-gout mechanism). Poorly bioavailable in aglycone form; glycoside forms (rutin, quercitrin) from food are better absorbed. Water-soluble glycosides extract in tea; aglycone extracts better in alcohol. Heat-stable: survives cooking. Drying preserves quercetin well. Gut bacteria deglycosylate quercetin glycosides for absorption. Onion skins contain 10× more quercetin than flesh.",
+
+  "Apigenin":
+    "Flavone found in chamomile, parsley, celery, and many Asteraceae. Binds GABA-A benzodiazepine receptors as a partial agonist — anxiolytic without strong sedation or dependence risk. Also anti-inflammatory (inhibits COX-2, iNOS) and anti-proliferative. Water-soluble glycoside (apigenin-7-glucoside) extracts well in chamomile tea. Alcohol tincture extracts both glycoside and aglycone forms. Heat-stable. Drying preserves apigenin. Relatively poor oral bioavailability (~30%) due to first-pass metabolism, but chamomile tea provides clinically relevant amounts. Not significantly affected by fermentation.",
+
+  "Ricin":
+    "Extremely toxic lectin (ribosome-inactivating protein) found in castor bean seeds. One of the most potent plant toxins — lethal dose ~1 μg/kg. Inhibits protein synthesis by depurinating ribosomal RNA. NOT present in castor oil — the oil extraction process denatures and removes ricin. Heating above 80°C for 10 minutes denatures ricin. Not volatile — no inhalation risk from seeds. Water extraction would dissolve ricin — castor bean tea would be toxic. Castor oil is safe because ricin is water-soluble but not oil-soluble, and the pressing and heating process eliminates any trace contamination.",
+
+  "Podophyllotoxin":
+    "Lignan found in mayapple (Podophyllum peltatum) rhizome. Potent antimitotic: inhibits tubulin polymerization, arresting cell division in metaphase. Too toxic for internal use in crude form. Semi-synthetic derivatives etoposide and teniposide are important chemotherapy drugs. Topical podophyllin resin (25% podophyllotoxin) used for genital warts. Alcohol tincture extracts podophyllotoxin efficiently. Water extraction is less effective (poorly water-soluble). Drying preserves podophyllotoxin. Heat-stable under normal conditions. Extremely toxic if ingested — causes severe GI damage, bone marrow suppression, and multiorgan failure.",
+
+  "Aconitine":
+    "Diterpenoid alkaloid from aconite (Aconitum species). Extremely toxic — lethal dose ~2–5 mg. Activates voltage-gated sodium channels, causing persistent depolarization of cardiac and neural tissue. Traditional Chinese and Ayurvedic processing (prolonged boiling/steaming) reduces aconitine to less toxic aconine and benzoylaconine derivatives — processed aconite (fu zi / zhi fu zi) has 1/200th the toxicity of raw. Alcohol tincture of raw aconite is EXTREMELY dangerous. Drying does NOT reduce toxicity. Only used after extensive processing in traditional formulas by experienced practitioners. Homeopathic preparations are diluted beyond pharmacological activity.",
+};
+
 // ── Parser ───────────────────────────────────────────────────────────────────
 
 class CompendiumParser {
@@ -556,6 +721,7 @@ class CompendiumParser {
     this.parseAppendixF();
     this.parseSynergyTables();
     this.parseCompoundReference();
+    this.applySubstanceDescriptions();
     console.log(`  Plants:       ${this.plants.size}`);
     console.log(`  Conditions:   ${this.conditions.size}`);
     console.log(`  Body Systems: ${this.bodySystems.size}`);
@@ -1166,6 +1332,20 @@ class CompendiumParser {
     }
 
     console.log(`  Compound ref links: ${linked}`);
+  }
+
+  // ── Apply substance descriptions ─────────────────────────────────────────
+
+  private applySubstanceDescriptions() {
+    let applied = 0;
+    for (const sub of this.substances.values()) {
+      const desc = SUBSTANCE_DESCRIPTIONS[sub.name];
+      if (desc) {
+        sub.description = desc;
+        applied++;
+      }
+    }
+    console.log(`  Substance descs: ${applied}/${this.substances.size}`);
   }
 
   // ── Build output ──────────────────────────────────────────────────────────
