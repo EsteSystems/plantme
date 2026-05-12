@@ -1,0 +1,21 @@
+{
+  "name": "time-receiver",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "WWVB / DCF77 / RBU long-wave time-code encoder, decoder, and simulator.",
+  "bin": {
+    "time-receiver": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test --import tsx ./test/*.test.ts",
+    "demo": "tsx src/cli.ts demo",
+    "cli": "tsx src/cli.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  }
+}
